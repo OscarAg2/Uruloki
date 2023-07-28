@@ -8,11 +8,11 @@ def home():
 
 @app.route('/Torneos')
 def torneos():
-    return "Torneos"
+    return render_template('torneos.html')
 
 @app.route('/Tienda')
 def tienda():
-    return "Tienda"
+    return render_template('tienda.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
