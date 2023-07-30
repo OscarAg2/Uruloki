@@ -12,23 +12,29 @@
             integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
             crossorigin="anonymous" />
 
-        <!-- CSS Custom -->
+        <!-- CSS NavBar -->
         <link
-            rel="stylesheet2"
-            href="{{url_for('static',filename='CSS/style-home.css')}}" />
+            rel="stylesheet"
+            href="{{url_for('static',filename='CSS/style-base.css')}}" />
+
+        <!-- CSS Pagina -->
+        {%block styles%} {% endblock %}
+
+        <!-- Titulo Pagina -->
+        <title>{% block title %} {% endblock title %}</title>
     </head>
 
     <body>
         <nav
             class="navbar navbar-expand-lg"
-            style="background-color: #333"
+            style="background-color: #1D1C1C"
             data-bs-theme="dark">
             <div class="container-fluid justify-content-center">
                 <a class="navbar-brand" href="/">
                     <img
                         width="50"
                         height="50"
-                        src="https://img.icons8.com/ios/50/B60808/dragon.png"
+                        src="https://img.icons8.com/ios/50/D90A0A/dragon.png"
                         alt="dragon" />
                 </a>
                 <button
@@ -39,7 +45,7 @@
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-                    <img width="32" height="32" src="https://img.icons8.com/material-rounded/32/D0D0D0/circled-menu.png" alt="circled-menu"/>                </button>
+                    <img width="32" height="32" src="https://img.icons8.com/material-rounded/32/D0D0D0/circled-menu.png" alt="circled-menu"/></button>
                 <div
                     class="collapse navbar-collapse flex-grow-0"
                     id="navbarSupportedContent">
@@ -49,7 +55,7 @@
                                 href="#">Principal</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{url_for('torneos')}}">Torneos</a>
+                            <a class="nav-link active" href="{{url_for('torneos')}}">Eventos</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a
@@ -82,7 +88,9 @@
             </div>
         </nav>
 
-        {% block content %} {% endblock %}
+        {% block content %} 
+        
+        {% endblock %}
         <!-- JS Bootstrap -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
