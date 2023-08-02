@@ -6,3 +6,14 @@
 .card-body{
     background-color: #E2DDDD;
 }
+
+.eventos{
+    background-color: #bcc9ce;
+    background-image: url(https://www.elduende.com.mx/wp-content/uploads/dices6.png);
+}
+
+.vereventos{
+    background-color: #1D1C1C;
+    color: #D90A0A;
+    border-color: #000000;
+}

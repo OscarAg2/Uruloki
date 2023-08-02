@@ -3,41 +3,235 @@
 {%block title%} Principal {%endblock%}
 
 {%block styles%}
-<link rel="stylesheet"
+<link
+    rel="stylesheet"
     href="{{url_for('static',filename='CSS/style-home.css')}}" />
-<link rel="stylesheet"
+<link
+    rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 {%endblock%}
 
 {% block content%}
-<div class="album py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <h1 class="text-center">Productos Nuevos</h1>
-        </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img
-                        src="https://www.educaciontrespuntocero.com/wp-content/uploads/2022/12/71to69HstKL._AC_SL1024_.jpg"
-                        class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Monopoly</h5>
-                        <p class="card-text">350Bs</p>
-                        <button type="button" class="btn btn-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor"
-                                class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
-                            </svg>
-                            Agregar al Carrito
+<div class="row text-center justify-content-center">
+    <div class="col-lg-10 col-md-12">
+        <section class="pb-4">
+            <div class="bg-white border rounded-5 mt-5">
+                <div class="w-100 p-4 pb-4">
+                    <div id="carouselExampleDark" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleDark"
+                                data-bs-slide-to="0" class="active" aria-current="true"
+                                aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark"
+                                data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleDark"
+                                data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner rounded-5 shadow-4-strong">
+                            <div class="carousel-item active" data-bs-interval="10000">
+                                <img
+                                    src="https://i.guim.co.uk/img/media/397729d50688242e333a926b4a6aaa51fe05dbb3/0_9_634_380/master/634.jpg?width=1200&quality=85&auto=format&fit=max&s=c6058cfd8d9de1a8dd274aa3a888bc65"
+                                    class="d-block w-100 cover-carousel" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>First slide label</h5>
+                                    <p>Some representative placeholder content for the first
+                                        slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000">
+                                <img
+                                    src="https://www.superparent.com/wp-content/uploads/2023/01/catan-dawn-of-humankind-game-board.jpg"
+                                    class="d-block w-100 cover-carousel" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Second slide label</h5>
+                                    <p>Some representative placeholder content for the
+                                        second slide.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img
+                                    src="https://m.media-amazon.com/images/I/91NoQQ-p4hL.jpg"
+                                    class="d-block w-100 cover-carousel" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>Third slide label</h5>
+                                    <p>Some representative placeholder content for the third
+                                        slide.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
                         </button>
                     </div>
                 </div>
             </div>
+        </section>
+    </div>
+</div>
 
+<div class="container-fluid eventos">
+    <div class="container">
+
+        <div class="row justify-content-center">
+            <h1 class="text-center mt-3">Eventos Proximos</h1>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Torneo Magic</h5>
+                        <p class="card-text">Some quick example text to build on
+                            the
+                            card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
+                    <div class="card-footer text-body-secondary text-center">20
+                        de Agosto 2023</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on
+                            the
+                            card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
+                    <div class="card-footer text-body-secondary text-center">20
+                        de Agosto 2023</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on
+                            the
+                            card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
+                    <div class="card-footer text-body-secondary text-center">20
+                        de Agosto 2023</div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on
+                            the
+                            card title and make up the bulk of the card's
+                            content.</p>
+                    </div>
+                    <div class="card-footer text-body-secondary text-center">20
+                        de Agosto 2023</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container mt-4 justify-content-center">
+            <div class="text-center">
+                <a class="btn btn-primary vereventos mb-3" href="#"
+                    role="button">Ver
+                    Todos Los Eventos</a>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="container mt-4">
+    <div id="myCarousel" class="carousel slide"
+        data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#myCarousel"
+                data-bs-slide-to="0"
+                class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#myCarousel"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#myCarousel"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded-5">
+            <div class="carousel-item active">
+
+                <img
+                    src="https://www.superparent.com/wp-content/uploads/2023/01/catan-dawn-of-humankind-game-board.jpg"
+                    class="bd-placeholder-img d-block" alt="..." width="100%"
+                    height="100%">
+
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Example headline.</h1>
+                        <p>Some representative placeholder content for the first
+                            slide of the carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Sign up
+                                today</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                    preserveAspectRatio="xMidYMid slice" focusable="false"><rect
+                        width="100%" height="100%" fill="#777" /></svg>
+
+                <div class="container">
+                    <div class="carousel-caption">
+                        <h1>Another example headline.</h1>
+                        <p>Some representative placeholder content for the
+                            second
+                            slide of the carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <svg class="bd-placeholder-img" width="100%" height="100%"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                    preserveAspectRatio="xMidYMid slice" focusable="false"><rect
+                        width="100%" height="100%" fill="#777" /></svg>
+
+                <div class="container">
+                    <div class="carousel-caption text-end">
+                        <h1>One more for good measure.</h1>
+                        <p>Some representative placeholder content for the third
+                            slide of this carousel.</p>
+                        <p><a class="btn btn-lg btn-primary" href="#">Browse
+                                gallery</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button"
+            data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button"
+            data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
 {% endblock %}
