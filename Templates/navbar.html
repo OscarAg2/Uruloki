@@ -1,100 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <!-- CSS Bootstrap -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-            crossorigin="anonymous" />
+    <!-- CSS Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
 
-        <!-- CSS NavBar -->
-        <link
-            rel="stylesheet"
-            href="{{url_for('static',filename='CSS/style-base.css')}}" />
+    <!-- CSS NavBar -->
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='CSS/style-base.css')}}"
+    />
 
-        <!-- CSS Pagina -->
-        {%block styles%} {% endblock %}
+    <!-- CSS Pagina -->
+    {%block styles%} {% endblock %}
 
-        <!-- Titulo Pagina -->
-        <title>{% block title %} {% endblock title %}</title>
-    </head>
+    <!-- Titulo Pagina -->
+    <title>{% block title %} {% endblock title %}</title>
+  </head>
 
-    <body>
-        <nav
-            class="navbar navbar-expand-lg"
-            style="background-color: #1D1C1C"
-            data-bs-theme="dark">
-            <div class="container-fluid justify-content-center">
-                <a class="navbar-brand" href="/">
-                    <img
-                        width="50"
-                        height="50"
-                        src="https://img.icons8.com/ios/50/D90A0A/dragon.png"
-                        alt="dragon" />
-                </a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <img width="32" height="32" src="https://img.icons8.com/material-rounded/32/D0D0D0/circled-menu.png" alt="circled-menu"/></button>
-                <div
-                    class="collapse navbar-collapse flex-grow-0"
-                    id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page"
-                                href="{{url_for('home')}}">Principal</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{url_for('torneos')}}">Eventos</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a
-                                class="nav-link dropdown-toggle active"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Tienda
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="#">Magic The
-                                        Gathering</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Warhammer
-                                        40k</a></li>
-                                <li><a class="dropdown-item" href="#">Juegos de
-                                        Mesa</a></li>
-                                <li><a class="dropdown-item" href="#">Miscelanea</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li>
-                                    <a class="dropdown-item"
-                                        href="{{url_for('tienda')}}">Todos los
-                                        Articulos</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: #1d1c1c"
+      data-bs-theme="dark"
+    >
+      <div class="container-fluid justify-content-center">
+        <a class="navbar-brand" href="/">
+          <img
+            width="50"
+            height="50"
+            src="https://img.icons8.com/ios/50/D90A0A/dragon.png"
+            alt="dragon"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <img
+            width="32"
+            height="32"
+            src="https://img.icons8.com/material-rounded/32/D0D0D0/circled-menu.png"
+            alt="circled-menu"
+          />
+        </button>
+        <div
+          class="collapse navbar-collapse flex-grow-0"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="{{url_for('home')}}"
+                >Principal</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{{url_for('torneos')}}"
+                >Eventos</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle active"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Tienda
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#">Magic The Gathering</a>
+                </li>
+                <li><a class="dropdown-item" href="#">Warhammer 40k</a></li>
+                <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
+                <li><a class="dropdown-item" href="#">Miscelanea</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="{{url_for('tienda')}}"
+                    >Todos los Articulos</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    <footer class="text-white text-center text-lg-start">
+      <!-- Grid container -->
+      <div class="container p-4">
+        <!--Grid row-->
+        <div class="row mt-4">
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-4">Sobre Nosotros</h5>
+
+            <p>
+              At vero eos et accusamus et iusto odio dignissimos ducimus qui
+              blanditiis praesentium voluptatum deleniti atque corrupti.
+            </p>
+
+            <p>
+              Blanditiis praesentium voluptatum deleniti atque corrupti quos
+              dolores et quas molestias.
+            </p>
+
+            <div class="mt-4">
+              <!-- Instagram -->
+              <a type="button" class="btn btn-floating" href="https://www.instagram.com/urulokiscz/"
+                ><img
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/color/48/instagram-new--v1.png"
+                  alt="instagram-new--v1"
+              /></a>
+              <!-- Facebook -->
+              <a type="button" class="btn btn-floating" href="https://www.facebook.com/profile.php?id=100064057929678"
+                ><img
+                  width="48"
+                  height="48"
+                  src="https://img.icons8.com/fluency/48/facebook.png"
+                  alt="facebook"
+              /></a>
             </div>
-        </nav>
+          </div>
+          <!--Grid column-->
 
-        {% block content %} 
-        
-        {% endblock %}
-        <!-- JS Bootstrap -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-            crossorigin="anonymous"></script>
-    </body>
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-4 pb-1">Informacion de Contacto</h5>
+
+            <ul class="fa-ul" style="margin-left: 1.65em">
+              <li class="mb-3">
+                <span class="fa-li"><i class="fas fa-home"></i></span
+                ><span class="ms-2">New York, NY 10012, US</span>
+              </li>
+              <li class="mb-3">
+                <span class="fa-li"><i class="fas fa-envelope"></i></span
+                ><span class="ms-2">info@example.com</span>
+              </li>
+              <li class="mb-3">
+                <span class="fa-li"><i class="fas fa-phone"></i></span
+                ><span class="ms-2">+ 01 234 567 88</span>
+              </li>
+              <li class="mb-3">
+                <span class="fa-li"><i class="fas fa-print"></i></span
+                ><span class="ms-2">+ 01 234 567 89</span>
+              </li>
+            </ul>
+          </div>
+          <!--Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-uppercase mb-4">Horarios de Atencion</h5>
+
+            <table class="table text-center text-white">
+              <tbody class="font-weight-normal">
+                <tr>
+                  <td>Lunes:</td>
+                  <td>8am - 9pm</td>
+                </tr>
+                <tr>
+                  <td>Martes:</td>
+                  <td>8am - 1am</td>
+                </tr>
+                <tr>
+                  <td>Miercoles:</td>
+                  <td>9am - 10pm</td>
+                </tr>
+                <tr>
+                  <td>Jueves:</td>
+                  <td>9am - 10pm</td>
+                </tr>
+                <tr>
+                  <td>Viernes:</td>
+                  <td>9am - 10pm</td>
+                </tr>
+                <tr>
+                  <td>Sabado:</td>
+                  <td>9am - 10pm</td>
+                </tr>
+                <tr>
+                  <td>Domingo:</td>
+                  <td>9am - 10pm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+      </div>
+      <!-- Grid container -->
+
+      <!-- Copyright -->
+      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+        © 2023 Copyright: OscarAg2 & Namzak
+        <section class="mb-4 text-center">
+          <a
+          class="btn btn-floating m-1"
+          href="https://github.com/OscarAg2"
+          role="button"
+          ><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/FFFFFF/github.png" alt="github"/></a>
+        </section>
+      </div>
+      <!-- Copyright -->
+    </footer>
+
+    <!-- JS Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
