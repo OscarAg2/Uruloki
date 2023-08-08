@@ -2,3 +2,8 @@
     background-color: rgba(0,0,0,0.9);
     background-blend-mode: darken;
 }
+
+.card-body{
+    background-color: #717171;
+    background-image: url(https://www.elduende.com.mx/wp-content/uploads/dices6.png);
+}

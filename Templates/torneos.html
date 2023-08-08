@@ -6,97 +6,54 @@
 {%endblock%}
 
 {% block content %}
-<div class="container mt-4">
-
-  <h1 class="text-center">Todos Los Eventos</h1>
-  <!-- Search bar -->
-  <div class="mb-3">
-    <input type="text" class="form-control" placeholder="Buscar Torneo">
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <h1 class="text-center mt-5">Eventos</h1>
+    </div>
   </div>
 
-  <!-- Filters button -->
-  <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse"
-    data-bs-target="#filterOptions" aria-expanded="false"
-    aria-controls="filterOptions">
-    Filtros
-  </button>
+  <div class="row">
 
-  <!-- Filter options (hidden by default) -->
-  <div class="collapse mb-3" id="filterOptions">
-    <!-- Filter options row -->
-    <div class="row">
-      <!-- Dropdown for Price Range -->
-      <div class="col-md-6 mb-2">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="priceDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Price Range
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="priceDropdown">
-            <li><a class="dropdown-item" href="#" data-value="0-500">0 - 500 Bs</a></li>
-            <li><a class="dropdown-item" href="#" data-value="500-1000">500 - 1000 Bs</a></li>
-            <li><a class="dropdown-item" href="#" data-value="1000-1500">1000 - 1500 Bs</a></li>
-            <li><a class="dropdown-item" href="#" data-value="1500-2000">1500 - 2000 Bs</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Dropdown for Other Option -->
-      <div class="col-md-6 mb-2">
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="optionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Option
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="optionDropdown">
-            <li><a class="dropdown-item" href="#" data-value="option1">Option 1</a></li>
-            <li><a class="dropdown-item" href="#" data-value="option2">Option 2</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- End of filter options row -->
-
-    <!-- Reset Filters button -->
-    <button class="btn btn-secondary me-2" id="resetFiltersBtn">Reset Filters</button>
-    <span id="selectedOptions"></span>
-
-  </div>
-
-  <!-- Album cards -->
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <!-- Card 1 -->
     <div class="col">
       <div class="card">
-        <img src="path_to_image1.jpg" class="card-img-top" alt="Image 1">
         <div class="card-body">
-          <h5 class="card-title">Card 1</h5>
-          <p class="card-text">Description for card 1.</p>
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in
+            to additional content.</p>
         </div>
       </div>
     </div>
 
-    <!-- Card 2 -->
     <div class="col">
       <div class="card">
-        <img src="path_to_image2.jpg" class="card-img-top" alt="Image 2">
-        <div class="card-body">
-          <h5 class="card-title">Card 2</h5>
-          <p class="card-text">Description for card 2.</p>
+        <div class="card-body">  <!-- Add style="background-image:{{Variable_name}}" for changing the background with the pic of the event-->
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in
+            to additional content.</p>
         </div>
       </div>
     </div>
 
-    <!-- Card 3 -->
     <div class="col">
       <div class="card">
-        <img src="path_to_image3.jpg" class="card-img-top" alt="Image 3">
         <div class="card-body">
-          <h5 class="card-title">Card 3</h5>
-          <p class="card-text">Description for card 3.</p>
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in
+            to additional content.</p>
         </div>
       </div>
     </div>
 
-    <!-- Add more cards here -->
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in
+            to additional content.</p>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>
@@ -104,30 +61,4 @@
 
 {%block scripts%}
 <script src="{{url_for('torneos',filename='Scripts/torneos.js')}}"></script>
-<script>
-  const selectedOptions = [];
-
-  function updateSelectedOptions() {
-    const selectedOptionsText = selectedOptions.join(", ");
-    const selectedOptionsElement = document.getElementById("selectedOptions");
-    selectedOptionsElement.textContent = selectedOptionsText;
-  }
-
-  function resetFilters() {
-    selectedOptions.length = 0;
-    updateSelectedOptions();
-  }
-
-  document.querySelectorAll(".dropdown-menu a").forEach((item) => {
-    item.addEventListener("click", (event) => {
-      const optionValue = event.target.getAttribute("data-value");
-      if (!selectedOptions.includes(optionValue)) {
-        selectedOptions.push(optionValue);
-        updateSelectedOptions();
-      }
-    });
-  });
-
-  document.getElementById("resetFiltersBtn").addEventListener("click", resetFilters);
-</script>
 {%endblock%}
