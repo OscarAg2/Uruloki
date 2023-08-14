@@ -7,182 +7,168 @@
 <link
     rel="stylesheet"
     href="{{url_for('static',filename='CSS/style-home.css')}}" />
-<link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 {%endblock%}
 
 {% block content%}
-<div class="album-nuevos">
+
+<header class="bg-dark">
+    <div class="container pt-4 pt-xl-5">
+        <div class="row pt-5">
+            <div class="col-md-8 col-xl-6 text-center text-md-start mx-auto">
+                <div class="text-center">
+                    <p class="fw-bold text-success mb-2">Eventos, Torneos y Tienda de Juegos de Mesa</p>
+                    <h1 class="fw-bold">La Mejor Tienda en Santa Cruz</h1>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10 mx-auto">
+                <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="{{url_for('static',filename='assets/img/products/magic%20the%20gathering.png')}}" width="417" height="303"></div>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="assets/img/products/playing_dnd_with_friends_by_remyartt_deoz9a9-pre.jpg"></div>
+                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="assets/img/products/gettyimages-1212201194-4ec3c82a40a41644543a69d931a6140a8a939c35.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="py-5">
+    <div class="container text-center py-5">
+        <p class="mb-4" style="font-size: 1.6rem;">Siguenos en cualquiera de nuestras redes sociales!!!</p><a href="#" style="margin-right: 20px;"> <i class="fab fa-instagram" style="font-size: 50px;margin-right: 0px;"></i></a><a href="#" style="margin-right: 10px;"><i class="fab fa-whatsapp" style="font-size: 51px;height: 50px;margin-right: 0px;"></i> </a><a href="#"> <i class="fab fa-facebook" style="font-size: 50px;"></i></a>
+    </div>
+</section>
+<section>
+    <div class="container bg-dark py-5">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Nuestros Ulimos Productos</p>
+                <h3 class="fw-bold">NUEVOS PRODUCTOS!!!</h3>
+            </div>
+        </div>
+        <div class="py-5 p-lg-5">
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                <div class="col mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid flex-shrink-1 flex-fill" width="320" height="200" style="width: 320px;height: 200px;" src="assets/img/products/3.jpg">
+                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="assets/img/products/2.jpg">
+                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" src="assets/img/products/gettyimages-1212201194-4ec3c82a40a41644543a69d931a6140a8a939c35.jpg" style="height: 200px;">
+                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body px-4 py-5 px-md-5">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="assets/img/products/1.jpg">
+                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col"><button class="btn btn-primary shadow" type="button">Ir a la Tienda</button></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container py-5">
+        <div class="mx-auto" style="max-width: 900px;">
+            <h1 class="text-center">Nuestra Ubicacion</h1><iframe allowfullscreen="" frameborder="0" loading="lazy" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC8XHxTIJPgeNVwXte2o-IbmKp0MOE_J6A&amp;q=Urul%C3%B3ki+(Juegos+De+Mesa+Y+Magic)%2C+Calle+21+de+Mayo%2C+Santa+Cruz+de+la+Sierra&amp;zoom=17" width="100%" height="400"></iframe>
+        </div>
+    </div>
+</section>
+<section class="py-5 mt-5">
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Testimonios</p>
+                <h2 class="fw-bold"><strong>Lo que la gente dice de nosotros</strong></h2>
+                <p class="text-muted">Todos los juegos que te imaginas, estan aqui!!!</p>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 d-sm-flex justify-content-sm-center">
+            <div class="col mb-4">
+                <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <p class="bg-dark border rounded border-dark p-4">Excelente espacio de juegos de mesa accesibles y muy diversos</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="/Static/assets/img/team/unnamed.png">
+                        <div>
+                            <p class="fw-bold text-primary mb-0">E. Sebastián Bedregal Olmos</p>
+                            <p class="text-muted mb-0">Guia Local</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <p class="bg-dark border rounded border-dark p-4">Gran lugar para jugar y compartir con amigos, ambiente relajado y divertido. Con gran variedad de juegos de mesa para prestarse y para comprar.</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/unnamed%20(1).png">
+                        <div>
+                            <p class="fw-bold text-primary mb-0">Marcelo Ernesto Robles Heredia</p>
+                            <p class="text-muted mb-0">Guia Local</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-4">
+                <div class="d-flex flex-column align-items-center align-items-sm-start">
+                    <p class="bg-dark border rounded border-dark p-4">Excelente atención, los encargados están capacitados para dar una orientación a lo que estés buscando a pesar de que la idea sea muy vaga</p>
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/unnamed%20(2).png">
+                        <div>
+                            <p class="fw-bold text-primary mb-0">laura campos</p>
+                            <p class="text-muted mb-0">Guia Local</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
     <div class="container">
-        <div class="row justify-content-center mb-3">
-            <h1 class="text-center mt-3">Productos Nuevos</h1>
-        </div>
-        <div id="myCarousel" class="carousel slide"
-            data-bs-ride="carousel" data-bs-theme="dark">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#myCarousel"
-                    data-bs-slide-to="0"
-                    class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#myCarousel"
-                    data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#myCarousel"
-                    data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+        <div class="row mb-5">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Contacto</p>
+                <h2 class="fw-bold">¿Como Puedes Contactarte?</h2>
             </div>
-            <div class="carousel-inner rounded-5">
-                <div class="carousel-item active">
-
-                    <img
-                        src="https://www.superparent.com/wp-content/uploads/2023/01/catan-dawn-of-humankind-game-board.jpg"
-                        class="bd-placeholder-img d-block" alt="..."
-                        width="100%"
-                        height="100%">
-
-                    <div class="container bg-info">
-                        <div class="carousel-caption text-center">
-                            <h1>CATAN</h1>
-                            <p>350Bs</p>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
+                <div class="d-flex flex-wrap flex-md-column justify-content-md-start align-items-md-start h-100">
+                    <div class="d-flex align-items-center p-3">
+                        <div class="bs-icon-md bs-icon-circle bs-icon-primary shadow d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon bs-icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-telephone">
+                                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+                            </svg></div>
+                        <div class="px-2">
+                            <h6 class="fw-bold mb-0">Telefono</h6>
+                            <p class="text-muted mb-0">+591 72620510</p>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img
-                        src="https://www.thespruce.com/thmb/lkY_LkKSUt0uZi0CCILwRL3MudE=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ExplodingKittens_FamilyGames_HeroSquare-750928e54de54f138da023343ef93f62.jpg"
-                        class="bd-placeholder-img d-block" alt="..."
-                        width="100%"
-                        height="100%">
-
-                    <div class="container bg-info">
-                        <div class="carousel-caption">
-                            <h1>EXPLODING KITTENS</h1>
-                            <p>470Bs</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img
-                        src="https://m.media-amazon.com/images/I/91bxvbfkn5L.jpg"
-                        class="bd-placeholder-img d-block" alt="..."
-                        width="100%"
-                        height="100%">
-
-                    <div class="container bg-info">
-                        <div class="carousel-caption text-center">
-                            <h1>Dungeons and Dragons: Starter Set</h1>
-                            <p>580Bs</p>
+                    <div class="d-flex align-items-center p-3">
+                        <div class="bs-icon-md bs-icon-circle bs-icon-primary shadow d-flex flex-shrink-0 justify-content-center align-items-center d-inline-block bs-icon bs-icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-pin">
+                                <path d="M4.146.146A.5.5 0 0 1 4.5 0h7a.5.5 0 0 1 .5.5c0 .68-.342 1.174-.646 1.479-.126.125-.25.224-.354.298v4.431l.078.048c.203.127.476.314.751.555C12.36 7.775 13 8.527 13 9.5a.5.5 0 0 1-.5.5h-4v4.5c0 .276-.224 1.5-.5 1.5s-.5-1.224-.5-1.5V10h-4a.5.5 0 0 1-.5-.5c0-.973.64-1.725 1.17-2.189A5.921 5.921 0 0 1 5 6.708V2.277a2.77 2.77 0 0 1-.354-.298C4.342 1.674 4 1.179 4 .5a.5.5 0 0 1 .146-.354zm1.58 1.408-.002-.001.002.001zm-.002-.001.002.001A.5.5 0 0 1 6 2v5a.5.5 0 0 1-.276.447h-.002l-.012.007-.054.03a4.922 4.922 0 0 0-.827.58c-.318.278-.585.596-.725.936h7.792c-.14-.34-.407-.658-.725-.936a4.915 4.915 0 0 0-.881-.61l-.012-.006h-.002A.5.5 0 0 1 10 7V2a.5.5 0 0 1 .295-.458 1.775 1.775 0 0 0 .351-.271c.08-.08.155-.17.214-.271H5.14c.06.1.133.191.214.271a1.78 1.78 0 0 0 .37.282z"></path>
+                            </svg></div>
+                        <div class="px-2">
+                            <h6 class="fw-bold mb-0">Ubicacion</h6>
+                            <p class="text-muted mb-0">Calle 21 de Mayo, Santa Cruz de la Sierra</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button"
-                data-bs-target="#myCarousel" data-bs-slide="prev">
-                <img width="50" height="50"
-                    src="https://img.icons8.com/ios/D3D1D1/circled-chevron-left.png"
-                    alt="circled-chevron-left" />
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button"
-                data-bs-target="#myCarousel" data-bs-slide="next">
-                <img width="50" height="50"
-                    src="https://img.icons8.com/ios/D3D1D1/circled-chevron-right--v1.png"
-                    alt="circled-chevron-right--v1" />
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
     </div>
-</div>
-
-<div class="container-fluid eventos">
-    <div class="container justify-content-center">
-
-        <div class="row justify-content-center">
-            <h1 class="text-center mt-3">Eventos Proximos</h1>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col justify-content-center mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Yu-Gi-Oh%21_%28Logo%29.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Torneo Magic</h5>
-                        <p class="card-text">Some quick example text to build on
-                            the
-                            card title and make up the bulk of the card's
-                            content.</p>
-                    </div>
-                    <div class="card-footer text-body-secondary text-center">20
-                        de Agosto 2023</div>
-                </div>
-            </div>
-
-            <div class="col justify-content-center mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://1000logos.net/wp-content/uploads/2022/11/Warhammer-logo.png" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on
-                            the
-                            card title and make up the bulk of the card's
-                            content.</p>
-                    </div>
-                    <div class="card-footer text-body-secondary text-center">20
-                        de Agosto 2023</div>
-                </div>
-            </div>
-
-            <div class="col justify-content-center mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://1000logos.net/wp-content/uploads/2022/10/Magic-The-Gathering-logo.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on
-                            the
-                            card title and make up the bulk of the card's
-                            content.</p>
-                    </div>
-                    <div class="card-footer text-body-secondary text-center">20
-                        de Agosto 2023</div>
-                </div>
-            </div>
-
-            <div class="col justify-content-center mt-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://logos-download.com/wp-content/uploads/2017/10/The_Lord_of_the_Rings_logo.svg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on
-                            the
-                            card title and make up the bulk of the card's
-                            content.</p>
-                    </div>
-                    <div class="card-footer text-body-secondary text-center">20
-                        de Agosto 2023</div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="container mt-4 justify-content-center">
-            <div class="text-center">
-                <a class="btn btn-primary mb-5" href="{{url_for('torneos')}}"
-                    role="button">Ver
-                    Todos Los Eventos</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="album-ubicacion">
-    <div class="row justify-content-center">
-        <h1 class="text-center">Nuestra Ubicacion</h1>
-    </div>
-    <div class="container mapa mt-1">
-        <div class="responsive-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3799.207059863601!2d-63.183774799999995!3d-17.781963200000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93f1e80c69bda01f%3A0x201957b3527ee76c!2sUrul%C3%B3ki%20(Juegos%20De%20Mesa%20Y%20Magic)!5e0!3m2!1ses-419!2sbo!4v1691014172064!5m2!1ses-419!2sbo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-    </div>
-</div>
-
+</section>
 {% endblock %}

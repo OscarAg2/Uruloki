@@ -13,10 +13,23 @@
       crossorigin="anonymous"
     />
 
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='assets/bootstrap/css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='assets/fonts/fontawesome-all.min.css')}}"
+    />
+
     <!-- CSS NavBar -->
     <link
       rel="stylesheet"
-      href="{{url_for('static',filename='CSS/style-base.css')}}"
+      href="{{url_for('static',filename='assets/CSS/style-base.css')}}"
     />
 
     <!-- CSS Pagina -->
@@ -28,76 +41,36 @@
 
   <body>
     <nav
-      class="navbar navbar-expand-lg"
-      style="background-color: #1d1c1c"
-      data-bs-theme="dark"
+      class="navbar navbar-expand-md sticky-top py-3 navbar-dark"
+      id="mainNav"
+      style="background: #1d1c1c"
     >
-      <div class="container-fluid justify-content-center">
-        <a class="navbar-brand" href="/">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/">
           <img
             width="50"
             height="50"
             src="https://img.icons8.com/ios/50/D90A0A/dragon.png"
             alt="dragon"
-          />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
+          /><span>Uruloki</span></a
+        ><button
           data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          class="navbar-toggler"
+          data-bs-target="#navcol-1"
         >
-          <img
-            width="32"
-            height="32"
-            src="https://img.icons8.com/material-rounded/32/D0D0D0/circled-menu.png"
-            alt="circled-menu"
-          />
+          <span class="visually-hidden">Toggle navigation</span
+          ><span class="navbar-toggler-icon"></span>
         </button>
-        <div
-          class="collapse navbar-collapse flex-grow-0"
-          id="navbarSupportedContent"
-        >
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+        <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="{{url_for('home')}}"
-                >Inicio</a
-              >
+              <a class="nav-link active" href="{{url_for('home')}}">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="{{url_for('torneos')}}"
-                >Eventos</a
-              >
+              <a class="nav-link" href="{{url_for('torneos')}}">Eventos</a>
             </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle active"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Tienda
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="#">Magic The Gathering</a>
-                </li>
-                <li><a class="dropdown-item" href="#">Warhammer 40k</a></li>
-                <li><a class="dropdown-item" href="#">Juegos de Mesa</a></li>
-                <li><a class="dropdown-item" href="#">Miscelanea</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="{{url_for('tienda')}}"
-                    >Todos los Articulos</a
-                  >
-                </li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('tienda')}}">Tienda</a>
             </li>
           </ul>
         </div>
@@ -106,7 +79,7 @@
 
     {% block content %} {% endblock %}
 
-    <footer class="text-white text-center text-lg-start">
+    <footer class="text-white text-center text-lg-start" style="background: #1d1c1c">
       <!-- Grid container -->
       <div class="container p-4">
         <!--Grid row-->
@@ -127,7 +100,10 @@
 
             <div class="mt-4">
               <!-- Instagram -->
-              <a type="button" class="btn btn-floating" href="https://www.instagram.com/urulokiscz/"
+              <a
+                type="button"
+                class="btn btn-floating"
+                href="https://www.instagram.com/urulokiscz/"
                 ><img
                   width="48"
                   height="48"
@@ -135,7 +111,10 @@
                   alt="instagram-new--v1"
               /></a>
               <!-- Facebook -->
-              <a type="button" class="btn btn-floating" href="https://www.facebook.com/profile.php?id=100064057929678"
+              <a
+                type="button"
+                class="btn btn-floating"
+                href="https://www.facebook.com/profile.php?id=100064057929678"
                 ><img
                   width="48"
                   height="48"
@@ -170,45 +149,6 @@
             </ul>
           </div>
           <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase mb-4">Horarios de Atencion</h5>
-
-            <table class="table text-center text-white">
-              <tbody class="font-weight-normal">
-                <tr>
-                  <td>Lunes:</td>
-                  <td>8am - 9pm</td>
-                </tr>
-                <tr>
-                  <td>Martes:</td>
-                  <td>8am - 1am</td>
-                </tr>
-                <tr>
-                  <td>Miercoles:</td>
-                  <td>9am - 10pm</td>
-                </tr>
-                <tr>
-                  <td>Jueves:</td>
-                  <td>9am - 10pm</td>
-                </tr>
-                <tr>
-                  <td>Viernes:</td>
-                  <td>9am - 10pm</td>
-                </tr>
-                <tr>
-                  <td>Sabado:</td>
-                  <td>9am - 10pm</td>
-                </tr>
-                <tr>
-                  <td>Domingo:</td>
-                  <td>9am - 10pm</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!--Grid column-->
         </div>
         <!--Grid row-->
       </div>
@@ -219,15 +159,25 @@
         © 2023 Copyright: Xchar & Namzak
         <section class="mb-4 text-center">
           <a
-          class="btn btn-floating m-1"
-          href="https://github.com/OscarAg2"
-          role="button"
-          ><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/FFFFFF/github.png" alt="github"/></a>
+            class="btn btn-floating m-1"
+            href="https://github.com/OscarAg2"
+            role="button"
+            ><img
+              width="50"
+              height="50"
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/github.png"
+              alt="github"
+          /></a>
           <a
-          class="btn btn-floating m-1"
-          href="https://github.com/AstraPAZeg"
-          role="button"
-          ><img width="50" height="50" src="https://img.icons8.com/ios-filled/50/FFFFFF/github.png" alt="github"/></a>
+            class="btn btn-floating m-1"
+            href="https://github.com/AstraPAZeg"
+            role="button"
+            ><img
+              width="50"
+              height="50"
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/github.png"
+              alt="github"
+          /></a>
         </section>
       </div>
       <!-- Copyright -->
@@ -239,6 +189,9 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="{{url_for('static',filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/bs-init.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/bold-and-dark.js')}}"></script>
 
     {%block scripts%} {%endblock%}
   </body>
