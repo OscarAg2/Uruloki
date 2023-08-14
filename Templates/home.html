@@ -22,9 +22,9 @@
             </div>
             <div class="col-12 col-lg-10 mx-auto">
                 <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
-                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="{{url_for('static',filename='assets/img/products/magic%20the%20gathering.png')}}" width="417" height="303"></div>
-                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="assets/img/products/playing_dnd_with_friends_by_remyartt_deoz9a9-pre.jpg"></div>
-                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="assets/img/products/gettyimages-1212201194-4ec3c82a40a41644543a69d931a6140a8a939c35.jpg"></div>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="{{url_for('static',filename='assets/img/products/magic.png')}}" width="417" height="303"></div>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="{{url_for('static',filename='assets/img/products/playing_dnd_with_friends_by_remyartt_deoz9a9-pre.jpg')}}"></div>
+                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="{{url_for('static',filename='assets/img/products/catan.jpg')}}"></div>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <div class="col mb-5">
                     <div class="card shadow-sm">
                         <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid flex-shrink-1 flex-fill" width="320" height="200" style="width: 320px;height: 200px;" src="assets/img/products/3.jpg">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid flex-shrink-1 flex-fill" width="320" height="200" style="width: 320px;height: 200px;" src="{{url_for('static',filename='assets/img/products/3.jpg')}}">
                             <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                 <div class="col mb-5">
                     <div class="card shadow-sm">
                         <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="assets/img/products/2.jpg">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="{{url_for('static',filename='assets/img/products/2.jpg')}}">
                             <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                 <div class="col mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" src="assets/img/products/gettyimages-1212201194-4ec3c82a40a41644543a69d931a6140a8a939c35.jpg" style="height: 200px;">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" src="{{url_for('static',filename='assets/img/products/catan.jpg')}}" style="height: 200px;">
                             <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                 <div class="col mb-4">
                     <div class="card shadow-sm">
                         <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="assets/img/products/1.jpg">
+                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="{{url_for('static',filename='assets/img/products/1.jpg')}}">
                             <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col"><button class="btn btn-primary shadow" type="button">Ir a la Tienda</button></div>
+                <div class="col"><a href="{{url_for('tienda')}}"><button class="btn btn-primary shadow" type="button">Ir a la Tienda</button></a></div>
             </div>
         </div>
     </div>
@@ -91,6 +91,7 @@
         </div>
     </div>
 </section>
+
 <section class="py-5 mt-5">
     <div class="container py-5">
         <div class="row mb-5">
@@ -104,7 +105,7 @@
             <div class="col mb-4">
                 <div class="d-flex flex-column align-items-center align-items-sm-start">
                     <p class="bg-dark border rounded border-dark p-4">Excelente espacio de juegos de mesa accesibles y muy diversos</p>
-                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="/Static/assets/img/team/unnamed.png">
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{url_for('static',filename='assets/img/team/team3.png')}}">
                         <div>
                             <p class="fw-bold text-primary mb-0">E. Sebastián Bedregal Olmos</p>
                             <p class="text-muted mb-0">Guia Local</p>
@@ -115,7 +116,7 @@
             <div class="col mb-4">
                 <div class="d-flex flex-column align-items-center align-items-sm-start">
                     <p class="bg-dark border rounded border-dark p-4">Gran lugar para jugar y compartir con amigos, ambiente relajado y divertido. Con gran variedad de juegos de mesa para prestarse y para comprar.</p>
-                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/unnamed%20(1).png">
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{url_for('static',filename='assets/img/team/team1.png')}}">
                         <div>
                             <p class="fw-bold text-primary mb-0">Marcelo Ernesto Robles Heredia</p>
                             <p class="text-muted mb-0">Guia Local</p>
@@ -126,7 +127,7 @@
             <div class="col mb-4">
                 <div class="d-flex flex-column align-items-center align-items-sm-start">
                     <p class="bg-dark border rounded border-dark p-4">Excelente atención, los encargados están capacitados para dar una orientación a lo que estés buscando a pesar de que la idea sea muy vaga</p>
-                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/unnamed%20(2).png">
+                    <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="{{url_for('static',filename='assets/img/team/team2.png')}}">
                         <div>
                             <p class="fw-bold text-primary mb-0">laura campos</p>
                             <p class="text-muted mb-0">Guia Local</p>
@@ -137,6 +138,7 @@
         </div>
     </div>
 </section>
+
 <section class="py-5">
     <div class="container">
         <div class="row mb-5">
@@ -172,3 +174,7 @@
     </div>
 </section>
 {% endblock %}
+
+{%block scripts%}
+    
+{%endblock%}

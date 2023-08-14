@@ -1,6 +1,7 @@
-from flask import  Flask, render_template, request
+from flask import  Flask, render_template, request, jsonify
 from flask_paginate import Pagination,get_page_args
 import pyodbc
+import requests
 
 app = Flask(__name__)
 
@@ -14,6 +15,8 @@ db_config = {
 }
 
 RESULTS_PER_PAGE = 12 # Number of results per page
+
+GOOGLE_API_KEY = 'AIzaSyBpYcf0TjJrOI2Aw3UJ5_KLDJQewicguEw'
 
 app.template_folder = "Templates"
 
@@ -63,6 +66,6 @@ def tienda():
     conn.close()
 
     return render_template('tienda.html', data=data, page=page,total_pages=total_pages)
-
+    
 if __name__ == '__main__':
     app.run(debug=True)
