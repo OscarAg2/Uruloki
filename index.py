@@ -1,12 +1,12 @@
 from flask import  Flask, render_template, request, jsonify
 from flask_paginate import Pagination,get_page_args
-#import pyodbc
-#import requests
+import pyodbc
+import requests
 
 app = Flask(__name__)
 
 # MySQL Configuration
-"""db_config = {
+db_config = {
     'server': 'uruloki.cxwhbhuw13bl.us-east-2.rds.amazonaws.com',
     'database': 'Uruloki',
     'user': 'admin',
@@ -14,7 +14,7 @@ app = Flask(__name__)
     'port': 1433  # Specify the port here
 }
 
-RESULTS_PER_PAGE = 12 # Number of results per page"""
+RESULTS_PER_PAGE = 12 # Number of results per page
 
 GOOGLE_API_KEY = 'AIzaSyBpYcf0TjJrOI2Aw3UJ5_KLDJQewicguEw'
 
@@ -30,7 +30,7 @@ def torneos():
 
 @app.route('/Tienda')
 def tienda(): 
-    """page = request.args.get('page', 1, type=int)
+    page = request.args.get('page', 1, type=int)
 
     conn = pyodbc.connect(
         f"DRIVER=ODBC Driver 17 for SQL Server;"
@@ -42,17 +42,17 @@ def tienda():
     )
 
     cursor = conn.cursor()
+
+    query = """
+        SELECT *
+        FROM (
+            SELECT *, ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS row_num
+            FROM OscarPrueba
+        ) AS t
+        WHERE row_num BETWEEN ? AND ?
     """
-    #query = """
-    #    SELECT *
-     #   FROM (
-    #        SELECT *, ROW_NUMBER() OVER (ORDER BY (SELECT NULL)) AS row_num
-    #        FROM OscarPrueba
-    #    ) AS t
-    #    WHERE row_num BETWEEN ? AND ?
-    #"""
     
-    """start_row = (page - 1) * RESULTS_PER_PAGE + 1
+    start_row = (page - 1) * RESULTS_PER_PAGE + 1
     end_row = start_row + RESULTS_PER_PAGE - 1
     
     cursor.execute(query, (start_row, end_row))
@@ -63,7 +63,7 @@ def tienda():
     total_rows = cursor.fetchone()[0]
     total_pages = (total_rows + RESULTS_PER_PAGE - 1) // RESULTS_PER_PAGE
     
-    conn.close()"""
+    conn.close()
 
     return render_template('tienda.html') #, data=data, page=page,total_pages=total_pages
 
