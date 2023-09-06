@@ -66,6 +66,10 @@ def tienda():
     conn.close()
 
     return render_template('tienda.html', data=data, page=page,total_pages=total_pages)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
     
 if __name__ == '__main__':
     app.run(debug=True)
