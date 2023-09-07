@@ -1,0 +1,166 @@
+{% extends "navbar.html" %}
+
+{%block title%} Inventario {%endblock%}
+
+{% block content%}
+
+<section style="margin-bottom: 30px;">
+    <div class="container">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col text-center"
+                style="margin-top: 10px;margin-bottom: 10px;">
+                <h1>Inventario</h1><small style="color: rgb(181,170,170);">Stock
+                    de la Tienda</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;"
+                                    rowspan="4">Codigo Item</th>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;">Nombre</th>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Stock</th>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">123493214</td>
+                                <td style="border-width: 1px;">Catan</td>
+                                <td style="border-right-width: 1px;">5</td>
+                                <td style="border-right-width: 1px;">100 Bs</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td
+                                    style="border-right-width: 1px;border-left-width: 1px;">342134312</td>
+                                <td style="border-right-width: 1px;">Monopoly</td>
+                                <td style="border-right-width: 1px;">6</td>
+                                <td style="border-right-width: 1px;">200 Bs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><strong>USAR&nbsp;https://datatables.net/ PARA LA TABLA :D</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center" style="margin-top: 10px;"><a
+                    href="agregarinv.html" style="color: transparent;">Link<button
+                        class="btn btn-sm" type="button"
+                        style="background: #2d6369;">Agregar Item a Stock</button></a></div>
+        </div>
+    </div>
+</section>
+<section
+    style="background: url(&quot;assets/img/dices6.png&quot;), rgb(58,55,84);">
+    <div class="container">
+        <div class="row" style="margin-top: 10px;">
+            <div class="col text-center">
+                <h1>Registrar Venta</h1><small style="color: rgb(181,170,170);">Registro
+                    de Venta</small>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <form>
+                    <div
+                        class="row text-center d-md-flex justify-content-md-center align-items-md-center"
+                        style="padding-bottom: 15px;">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-6 col-md-6"
+                                    style="padding-bottom: 5px;">
+                                    <div class="text-center"><strong>Codigo de
+                                            Item</strong></div>
+                                    <div
+                                        class="text-center d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center"><input
+                                            class="form-control" type="text"
+                                            style="width: 150px;height: 25px;"></div>
+                                </div>
+                                <div class="col-6 col-md-6"
+                                    style="padding-bottom: 5px;">
+                                    <div class="text-center"><strong>Cantidad de
+                                            Item</strong></div>
+                                    <div
+                                        class="text-center d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center"><input
+                                            class="form-control" type="text"
+                                            style="width: 150px;height: 25px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="padding-bottom: 7px;">
+                            <div class="text-center"><strong>Codigo Cliente</strong></div>
+                            <div
+                                class="text-center d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center"><input
+                                    class="form-control" type="text"
+                                    style="width: 150px;height: 25px;"></div>
+                        </div>
+                        <div class="col"><button class="btn" type="button"
+                                style="background: #2d6369;">Añadir al Pedido</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section
+    style="background: url(&quot;assets/img/dices6.png&quot;), rgb(58,55,84);padding-bottom: 15px;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div
+                    class="table-responsive d-flex justify-content-center align-items-center">
+                    <table class="table table-hover table-dark">
+                        <thead style="width: 320px;">
+                            <tr>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;"
+                                    rowspan="4">Codigo Item</th>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;">Nombre</th>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Cantidad</th>
+                                <th class="text-center"
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Total
+                                    a Pagar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td
+                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">123493214</td>
+                                <td style="border-width: 1px;">Catan</td>
+                                <td style="border-right-width: 1px;">5</td>
+                                <td style="border-right-width: 1px;">100 Bs</td>
+                            </tr>
+                            <tr class="text-center">
+                                <td
+                                    style="border-right-width: 1px;border-left-width: 1px;">342134312</td>
+                                <td style="border-right-width: 1px;">Monopoly</td>
+                                <td style="border-right-width: 1px;">6</td>
+                                <td style="border-right-width: 1px;">200 Bs</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><strong>USAR&nbsp;https://datatables.net/ PARA LA TABLA :D</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center align-items-center"><button
+                    class="btn btn-primary" type="button">Realizar Venta</button></div>
+            <div
+                class="col text-center d-flex justify-content-center align-items-center"><button
+                    class="btn btn-danger" type="button">Eliminar Venta</button></div>
+        </div>
+    </div>
+</section>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/bold-and-dark.js"></script>
+{%endblock%}

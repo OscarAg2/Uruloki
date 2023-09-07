@@ -70,6 +70,10 @@ def tienda():
 @app.route('/login')
 def login():
     return render_template('login.html')
+
+@app.route('/inventario')
+def inventario():
+    return render_template('inventario.html')
     
 if __name__ == '__main__':
     app.run(debug=True)

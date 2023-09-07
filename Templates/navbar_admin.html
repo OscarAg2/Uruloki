@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <title>Uruloki</title>
+        <meta name="Magic" content="Magic en Santa Cruz the gathering">
+        <meta name="Juegos de Mesa" content="Juegos de Mesa Bolivia">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
+        <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+        <link rel="stylesheet"
+            href="assets/css/Navbar-Centered-Brand-Dark-icons.css">
+    </head>
+
+    <body
+        style="background: url(&quot;assets/img/dices6.png&quot;), rgb(45, 44, 56);">
+        <nav class="navbar navbar-expand-md py-3" data-bs-theme="dark"
+            style="background: rgb(87,83,109);">
+            <div class="container"><a
+                    class="navbar-brand d-flex align-items-center" href="#"><span
+                        class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"
+                        style="background: rgb(244,55,55);"><i
+                            class="fas fa-dragon"></i></span><span>Uruloki</span></a><button
+                    data-bs-toggle="collapse" class="navbar-toggler"
+                    data-bs-target="#navcol-6"><span class="visually-hidden">Toggle
+                        navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse flex-grow-0 order-md-first"
+                    id="navcol-6">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item"><a class="nav-link active" href="#">Inventario</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Clientes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
+                    </ul>
+                    <div class="d-md-none my-2"><button
+                            class="btn btn-light me-2" type="button">Button</button><button
+                            class="btn btn-primary" type="button">Button</button></div>
+                </div>
+                <div class="d-none d-md-block"><a class="btn btn-danger"
+                        role="button" href="#">Cerrar Sesion</a></div>
+            </div>
+        </nav>
+
+        {% block content %} {% endblock %}
+    </body>
+</html>
