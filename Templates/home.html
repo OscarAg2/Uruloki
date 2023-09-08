@@ -4,9 +4,6 @@
 
 {%block styles%}
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link
-    rel="stylesheet"
-    href="{{url_for('static',filename='CSS/style-home.css')}}" />
 {%endblock%}
 
 {% block content%}
@@ -21,9 +18,9 @@
             </div>
             <div class="col-12 col-lg-10 mx-auto">
                 <div class="position-relative" style="display: flex;flex-wrap: wrap;justify-content: flex-end;">
-                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="{{url_for('static',filename='assets/img/products/magic.png')}}" width="417" height="303"></div>
-                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="{{url_for('static',filename='assets/img/products/playing_dnd_with_friends_by_remyartt_deoz9a9-pre.jpg')}}"></div>
-                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="{{url_for('static',filename='assets/img/products/catan.jpg')}}"></div>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-15%, 35%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.8" src="{{url_for('static',filename='/assets/img/products/magic.png')}}" width="417" height="303"></div>
+                    <div style="position: relative;flex: 0 0 45%;transform: translate3d(-5%, 20%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.4" src="{{url_for('static',filename='/assets/img/products/playing_dnd_with_friends_by_remyartt_deoz9a9-pre.jpg')}}"></div>
+                    <div style="position: relative;flex: 0 0 60%;transform: translate3d(0, 0%, 0);"><img class="img-fluid" data-bss-parallax="" data-bss-parallax-speed="0.25" src="{{url_for('static',filename='/assets/img/products/catan.jpg')}}"></div>
                 </div>
             </div>
         </div>
