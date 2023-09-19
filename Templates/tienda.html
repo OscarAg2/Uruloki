@@ -6,47 +6,98 @@
 {%endblock%}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8">
-            <h1>Tienda</h1>
+<section>
+    <div class="container bg-dark py-5">
+        <div class="row">
+            <div class="col-md-8 col-xl-6 text-center mx-auto">
+                <p class="fw-bold text-success mb-2">Nuestra Tienda</p>
+                <h3 class="fw-bold">Todos los Articulos aqui</h3>
+            </div>
+        </div>
+        <div>
             <div class="row">
-                {% for item in data %}
-                <div class="col-md-4">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ item.Cualquiera }}</h5>
-                            <p class="card-text">{{ item.Cualquiera }}</p>
+                <div class="col-6 text-center">
+                    <div class="dropdown d-inline-flex align-content-center">
+                        <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" id="jugadoresDropdownButton">
+                            Jugadores
+                        </button>
+                        <div class="dropdown-menu" style="background: rgb(79,76,107);">
+                            <strong style="margin-left: 10px;">1 - <span id="selectedJugadoresValue">4</span></strong>
+                            <input class="form-range" type="range" min="1" max="10" value="4" step="1" style="margin-top: 0px;width: 140px;margin-left: 7px;" name="jugadores" id="jugadoresRange">
                         </div>
                     </div>
                 </div>
+                <div class="col-6 text-center">
+                    <div class="dropdown d-inline-flex align-content-center"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Precios</button>
+                        <div class="dropdown-menu" style="background: rgb(79,76,107);"><strong style="margin-left: 10px;">Bold</strong><input class="form-range" type="range" min="0" max="3000" value="500" step="100" style="margin-top: 0px;width: 140px;margin-left: 7px;" name="precios"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col text-center"><strong>Nombre del Juego</strong></div>
+            </div>
+            <div class="row">
+                <div class="col text-center"><input class="border rounded-pill form-control-sm" type="text" placeholder="Busqueda por nombre"></div>
+            </div>
+        </div>
+        <div class="py-5 p-lg-5">
+            <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                {% for item in data %}
+                    <div class="col mb-5">
+                        <div class="card shadow-sm">
+                            <div class="card-body px-4 py-5 px-md-5"><img width="260" height="200" src="{{url_for('static',filename='assets/img/products/catan.jpg')}}">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5 class="fw-bold" style="margin-top: 7px;">{{ item.Cualquiera }}</h5>
+                                    </div>
+                                    <div class="col"><span class="badge" style="text-align: right;background: rgb(16,167,85);">DESCUENTO</span></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-4 col-xl-3 col-xxl-4"><strong style="text-decoration:  line-through;">100 Bs</strong></div>
+                                    <div class="col-6 col-lg-4 col-xxl-4 offset-0"><strong style="color: rgb(16,167,85);">50 Bs</strong></div>
+                                </div>
+                                <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+                                <div class="row">
+                                    <div class="col text-center"><button class="btn btn-primary shadow" type="button">Ver Detalles</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
-            <nav class="d-flex justify-content-center" aria-label="Page navigation">
-                <ul class="pagination">
-                    {% if page > 1 %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page - 1 }}">Anterior</a></li>
-                    {% endif %}
-                    {% for pg in range(1, total_pages + 1) %}
-                    <li class="page-item {% if pg == page %}active{% endif %}">
-                        <a class="page-link" href="?page={{ pg }}">{{ pg }}</a>
-                    </li>
-                    {% endfor %}
-                    <li class="page-item"><a class="page-link" href="?page={{ page + 1 }}">Siguiente</a></li>
-                </ul>
-            </nav>
         </div>
-        <aside class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    Filter Options
-                </div>
-                <div class="card-body">
-                    <!-- Filter options here -->
+        <div>
+            <div class="row text-center">
+                <div class="col text-center">
+                    <nav class="d-inline-flex">
+                        <ul class="pagination">
+                            {% if page > 1 %}
+                            <li class="page-item"><a class="page-link" aria-label="Previous" href="?page={{ page - 1 }}"><span aria-hidden="true">«</span></a></li>
+                            {% endif %}
+                            {% for pg in range(1, total_pages + 1) %}
+                            <li class="page-item {% if pg == page %}active{% endif %}"><a class="page-link" href="?page={{ pg }}">{{ pg }}</a></li>
+                            {% endfor %}
+                            <li class="page-item"><a class="page-link" aria-label="Next" href="?page={{ page + 1 }}><span aria-hidden="true">»</span></a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
-        </aside>
+        </div>
     </div>
-</div>
-
+</section>
 {% endblock %}
+
+{% block scripts%}
+<script>
+    // Get references to the elements
+    const jugadoresRange = document.getElementById('jugadoresRange');
+    const selectedJugadoresValue = document.getElementById('selectedJugadoresValue');
+
+    // Add an event listener to the input range to update the selected value
+    jugadoresRange.addEventListener('input', function () {
+        selectedJugadoresValue.innerText = this.value;
+    });
+</script>
+{%endblock%}
