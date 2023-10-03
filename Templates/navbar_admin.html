@@ -1,51 +1,144 @@
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>{% block title %} {% endblock title %}</title>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='assets-admin/bootstrap/css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='assets-admin/css/Nunito.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='assets-admin/fonts/fontawesome-all.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='assets-admin/css/animate.min.css')}}"
+    />
+    {%block styles%} {% endblock %}
+  </head>
 
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport"
-            content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>Uruloki</title>
-        <meta name="Magic" content="Magic en Santa Cruz the gathering">
-        <meta name="Juegos de Mesa" content="Juegos de Mesa Bolivia">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Inter:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
-        <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,500,600,700&amp;display=swap">
-        <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
-        <link rel="stylesheet"
-            href="assets/css/Navbar-Centered-Brand-Dark-icons.css">
-    </head>
-
-    <body
-        style="background: url(&quot;assets/img/dices6.png&quot;), rgb(45, 44, 56);">
-        <nav class="navbar navbar-expand-md py-3" data-bs-theme="dark"
-            style="background: rgb(87,83,109);">
-            <div class="container"><a
-                    class="navbar-brand d-flex align-items-center" href="#"><span
-                        class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon"
-                        style="background: rgb(244,55,55);"><i
-                            class="fas fa-dragon"></i></span><span>Uruloki</span></a><button
-                    data-bs-toggle="collapse" class="navbar-toggler"
-                    data-bs-target="#navcol-6"><span class="visually-hidden">Toggle
-                        navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse flex-grow-0 order-md-first"
-                    id="navcol-6">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link active" href="#">Inventario</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Clientes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Eventos</a></li>
-                    </ul>
-                    <div class="d-md-none my-2"><button
-                            class="btn btn-light me-2" type="button">Button</button><button
-                            class="btn btn-primary" type="button">Button</button></div>
-                </div>
-                <div class="d-none d-md-block"><a class="btn btn-danger"
-                        role="button" href="#">Cerrar Sesion</a></div>
+  <body id="page-top">
+    <div id="wrapper">
+      <nav
+        class="navbar align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 navbar-dark"
+      >
+        <div class="container-fluid d-flex flex-column p-0">
+          <a
+            class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
+            href="#"
+          >
+            <div class="sidebar-brand-icon rotate-n-15">
+              <i class="fas fa-dragon"></i>
             </div>
-        </nav>
+            <div class="sidebar-brand-text mx-3"><span>uruloki</span></div>
+          </a>
+          <hr class="sidebar-divider my-0" />
+          <ul class="navbar-nav text-light" id="accordionSidebar">
+            <li class="nav-item">
+              <a class="nav-link {% if request.endpoint == 'panel' %}active{% endif %}" href="{{url_for('panel')}}"
+                ><i class="fas fa-tachometer-alt"></i
+                ><span>Panel de Control</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.endpoint == 'inventario' %}active{% endif %}" href="{{url_for('inventario')}}"
+                ><i class="fas fa-table"></i><span>Inventario</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.endpoint == 'eventos-admin' %}active{% endif %}" href="{{url_for('eventos')}}"
+                ><i class="far fa-calendar-check"></i><span>Eventos</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if request.endpoint == 'clientes' %}active{% endif %}" href="{{url_for('clientes')}}"
+                ><i class="far fa-user-circle"></i><span>Clientes</span></a
+              >
+            </li>
+          </ul>
+          <div class="text-center d-none d-md-inline">
+            <button
+              class="btn rounded-circle border-0"
+              id="sidebarToggle"
+              type="button"
+            ></button>
+          </div>
+        </div>
+      </nav>
+      <div class="d-flex flex-column" id="content-wrapper">
+        <div id="content">
+          <nav
+            class="navbar navbar-expand bg-white shadow mb-4 topbar static-top navbar-light"
+          >
+            <div class="container-fluid">
+              <button
+                class="btn btn-link d-md-none rounded-circle me-3"
+                id="sidebarToggleTop"
+                type="button"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <ul class="navbar-nav flex-nowrap ms-auto">
+                <li class="nav-item dropdown no-arrow">
+                  <div class="nav-item dropdown no-arrow">
+                    <a
+                      class="dropdown-toggle nav-link"
+                      aria-expanded="false"
+                      data-bs-toggle="dropdown"
+                      href="#"
+                      ><span class="d-none d-lg-inline me-2 text-gray-600 small"
+                        >Alejandro</span
+                      ><img
+                        class="border rounded-circle img-profile"
+                        src="assets/img/avatars/avatar1.jpeg"
+                    /></a>
+                    <div
+                      class="dropdown-menu shadow dropdown-menu-end animated--grow-in"
+                    >
+                      <a class="dropdown-item" href="#"
+                        ><i
+                          class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"
+                        ></i
+                        >&nbsp;Cerrar Sesion</a
+                      >
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </nav>
+          <div class="container-fluid">{% block content %} {% endblock %}</div>
+        </div>
+        <footer class="bg-white sticky-footer">
+          <div class="container my-auto">
+            <div class="text-center my-auto copyright">
+              <span>Copyright © Oscar Aguilar (Xchar) 2023</span>
+            </div>
+          </div>
+        </footer>
+      </div>
+      <a class="border rounded d-inline scroll-to-top" href="#page-top"
+        ><i class="fas fa-angle-up"></i
+      ></a>
+    </div>
 
-        {% block content %} {% endblock %}
-    </body>
+    {%block scripts%} {%endblock%}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{url_for('static',filename='assets-admin/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets-admin/js/chart.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets-admin/js/bs-init.js')}}"></script>
+    <script src="{{url_for('static',filename='assets-admin/js/theme.js')}}"></script>
+  </body>
 </html>

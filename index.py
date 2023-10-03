@@ -38,6 +38,18 @@ def login():
 @app.route('/inventario')
 def inventario():
     return render_template('inventario.html')
+
+@app.route('/panel')
+def panel():
+    return render_template("paneldecontrol.html")
     
+@app.route('/eventos')
+def eventos():
+    return print("hi")
+
+@app.route('/clientes')
+def clientes():
+    return print("clients")
+
 if __name__ == '__main__':
     app.run(debug=True)
