@@ -1,0 +1,218 @@
+{%extends "navbar_admin.html"%} {%block title%} Clientes {%endblock%} {%block
+style%} {%endblock%} {%block content%}
+<h3 class="text-dark mb-4">Clientes/Usuarios</h3>
+<div class="card shadow mb-3">
+  <div class="card-header py-3">
+    <p class="text-primary m-0 fw-bold">Agregar Nuevo Cliente</p>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="username"
+              ><strong>Codigo Usuario</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="username"
+              placeholder="CL234"
+              name="username"
+              value="{{username}}"
+              readonly
+              style="color: black"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="credit"
+              ><strong>Credito Inicial</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="credit"
+              placeholder="100 Bs"
+              name="credit"
+              style="color: black"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="first_name"
+              ><strong>Nombres</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="first_name"
+              placeholder="John"
+              name="first_name"
+              style="color: black"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="last_name"
+              ><strong>Apellidos</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="last_name"
+              placeholder="Doe"
+              name="last_name"
+              style="color: black"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary btn-sm" type="submit">
+          Agregar Cliente
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card shadow">
+  <div class="card-header py-3">
+    <p class="text-primary m-0 fw-bold">Editar/Ver Cliente</p>
+  </div>
+  <div class="card-body">
+    <form id="search-form">
+      <div class="mb-3">
+        <label class="form-label" for="search-codigo"><strong>Codigo del Cliente</strong></label>
+        <input
+          class="form-control"
+          type="text"
+          id="search-codigo"
+          placeholder="CL234"
+          name="codigo"
+          style="color: black"
+        />
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary btn-sm" type="button" id="search-button">Buscar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Editar Cliente</h4>
+        <button
+          class="btn-close"
+          type="button"
+          aria-label="Close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="username-1"
+            style="margin-bottom: 0px; margin-right: 10px"
+          >
+            <strong>Nombre del Cliente:&nbsp;</strong>
+          </label>
+          <input
+            class="border rounded-pill"
+            type="text"
+            id="username-1"
+            placeholder="Nombre..."
+            name="username"
+          />
+        </div>
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="username-2"
+            style="margin-bottom: 0px; margin-right: 10px"
+          >
+            <strong>Creditos del Cliente:&nbsp;</strong>
+          </label>
+          <input
+            class="border rounded-pill"
+            type="text"
+            id="username-2"
+            placeholder="100 Bs"
+            name="username"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" type="button" id="update-button">Guardar y Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%} 
+{%block scripts%}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = new bootstrap.Modal(document.getElementById("modal-1"));
+    const username1Input = document.getElementById("username-1");
+    const username2Input = document.getElementById("username-2");
+  
+    // When the "Buscar" button is clicked
+    document.getElementById("search-button").addEventListener("click", function () {
+      const codigo = document.getElementById("search-codigo").value;
+  
+      // Make an AJAX request to your Flask backend to search for the customer data
+      fetch(`/search?codigo=${codigo}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            // Fill the modal with the retrieved data
+            username1Input.value = data.nombre;
+            username2Input.value = data.credito;
+            modal.show(); // Show the modal with the data
+          } else {
+            // Handle case where no data was found
+            alert("Cliente no encontrado.");
+          }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+  
+    // When the "Guardar y Salir" button is clicked
+    document.getElementById("update-button").addEventListener("click", function () {
+      // Get the customer's credit from the form
+      var credito = document.getElementById("username-2").value;
+      //const codigo = document.getElementById("search-codigo").value;
+      //const nombre-completo = document.getElementById("username-1").value;
+      
+      // Make a GET request to the update endpoint with the credit parameter
+      fetch('/update?credito=' + credito, {
+        method: 'PUT'
+      })
+      .then(response => response.text())
+      .then(data => {
+        // Display the response message in an alert
+        alert(data);
+        // Then close the modal
+        modal.hide();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Display an error message in an alert
+        alert('An error occurred while updating the customer information');
+      });
+    });
+  });
+  </script>
+  
+{%endblock%}
