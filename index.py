@@ -74,7 +74,8 @@ def clientes():
         customer_data = {
             'codigo-cliente': codigocliente,
             'credito': credit,
-            'nombre-completo': [first_name,last_name]   
+            'nombre-completo': [first_name, last_name
+            ]   
         } 
 
         # Insert the data into the MongoDB collection
@@ -105,8 +106,15 @@ def search_customer():
 @app.route('/update', methods=['PUT'])
 def update_customer():
     collection = db.get_collection('clientes')
-    credito = request.args.get('credito')
-    nombre_completo = request.args.get('nombre_completo')
+    credito = request.form.get('credito')
+    nombre_completo = request.form.get('nombre_completo')
+    if nombre_completo:
+        # Split the nombre_completo string into first and last name variables
+        first_name, last_name = nombre_completo.split(',', 1)
+    else:
+        # Handle the case where nombre_completo is not provided
+        first_name = ''
+        last_name = ''
     codigo = request.args.get('codigo')
     
     # Find the customer to update
@@ -115,25 +123,23 @@ def update_customer():
     
     if customer:
         
-        if nombre_completo:
-            nombre, apellido = nombre_completo.split(',',1)
-        
+        if nombre_completo:     
             # Define the new values for the customer
-            new_values = {'$set': {'nombre-completo':[nombre,apellido],'credito':credito }}
+            new_values = {'$set': {'nombre-completo.0':first_name,'nombre-completo.1':last_name,'credito':credito }}
             
             # Update the customer's information
             result = collection.update_one(query, new_values)
             
             # Check if the update was successful
             if result.modified_count == 1:
-                return 'Customer information updated successfully'
+                return jsonify({"message": "Actualizado"})
             else:
-                return 'An error occurred while updating the customer information'
+                return jsonify({})
         else:
-            return 'Full name not provided'
+            return jsonify({})
         
     else:
-        return 'Customer not found'
+        return jsonify({})
 
         
 if __name__ == '__main__':

@@ -1,5 +1,6 @@
-{%extends "navbar_admin.html"%} {%block title%} Clientes {%endblock%} {%block
-style%} {%endblock%} {%block content%}
+{%extends "navbar_admin.html"%} {%block title%} Clientes {%endblock%} 
+{%block style%} <script src="{{url_for('static',filename='Scripts/search-clientes.css')}}"></script> {%endblock%} 
+{%block content%}
 <h3 class="text-dark mb-4">Clientes/Usuarios</h3>
 <div class="card shadow mb-3">
   <div class="card-header py-3">
@@ -159,60 +160,88 @@ style%} {%endblock%} {%block content%}
   </div>
 </div>
 
+<!-- Error modal -->
+<div class="modal fade" role="dialog" tabindex="-1" id="error-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error</h4>
+        <button
+          class="btn-close"
+          type="button"
+          aria-label="Close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Cliente no encontrado</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {%endblock%} 
 {%block scripts%}
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const modal = new bootstrap.Modal(document.getElementById("modal-1"));
-    const username1Input = document.getElementById("username-1");
-    const username2Input = document.getElementById("username-2");
-  
-    // When the "Buscar" button is clicked
-    document.getElementById("search-button").addEventListener("click", function () {
-      const codigo = document.getElementById("search-codigo").value;
-  
-      // Make an AJAX request to your Flask backend to search for the customer data
-      fetch(`/search?codigo=${codigo}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data) {
-            // Fill the modal with the retrieved data
-            username1Input.value = data.nombre;
-            username2Input.value = data.credito;
-            modal.show(); // Show the modal with the data
-          } else {
-            // Handle case where no data was found
-            alert("Cliente no encontrado.");
-          }
-        })
-        .catch(error => console.error("Error:", error));
-    });
-  
-    // When the "Guardar y Salir" button is clicked
-    document.getElementById("update-button").addEventListener("click", function () {
-      // Get the customer's credit from the form
-      var credito = document.getElementById("username-2").value;
-      //const codigo = document.getElementById("search-codigo").value;
-      //const nombre-completo = document.getElementById("username-1").value;
-      
-      // Make a GET request to the update endpoint with the credit parameter
-      fetch('/update?credito=' + credito, {
-        method: 'PUT'
-      })
-      .then(response => response.text())
-      .then(data => {
-        // Display the response message in an alert
-        alert(data);
-        // Then close the modal
-        modal.hide();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Display an error message in an alert
-        alert('An error occurred while updating the customer information');
-      });
+  // When the "Buscar" button is clicked
+  document.getElementById("search-button").addEventListener("click", function () {
+    // Get the customer code from the form
+    var codigo = document.getElementById("search-codigo").value;
+    
+    // Make a GET request to the search endpoint with the code parameter
+    fetch('/search?codigo=' + codigo)
+    .then(response => response.json())
+    .then(data => {
+      if (Object.keys(data).length === 0) {
+        // Show an error modal if the customer is not found
+        var errorModal = new bootstrap.Modal(document.getElementById("error-modal"));
+        errorModal.show();
+      } else {
+        // Fill out the modal with the customer data
+        document.getElementById("username-1").value = data.nombre;
+        document.getElementById("username-2").value = data.credito;
+        // Show the modal
+        var modal = new bootstrap.Modal(document.getElementById("modal-1"));
+        modal.show();
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Display an error message in an alert
+      alert(error);
     });
   });
-  </script>
+
+  document.getElementById("update-button").addEventListener("click", function () {
+    // Get the customer code, name, and credit from the form
+    var codigo = document.getElementById("search-codigo").value;
+    var nombre_completo = document.getElementById("username-1").value;
+    var credito = document.getElementById("username-2").value;
   
+    // Make a PUT request to the update endpoint with the code parameter
+    fetch('/update?codigo=' + codigo, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'nombre_completo=' + encodeURIComponent(nombre_completo) + '&credito=' + encodeURIComponent(credito)
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Display a success or error message in an alert
+      alert(data.message);
+      // Hide the modal
+      var modal = new bootstrap.Modal(document.getElementById("modal-1"));
+      modal.hide();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Display an error message in an alert
+      alert('An error occurred while updating the customer data');
+    });
+  });
+</script>
 {%endblock%}
