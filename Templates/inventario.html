@@ -1,517 +1,368 @@
-{% extends "navbar_admin.html" %} 
+{% extends 'navbar_admin.html' %}
 
-{%block title%}Inventario{%endblock%} 
+{% block title %}
+  Inventario
+{% endblock %}
 
-{%block styles%} {%endblock%} 
+{% block styles %}
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
 
-{%block content%}
-<h3 class="text-dark mb-4">Inventario de la Tienda</h3>
-<div class="card shadow">
-  <div class="card-header py-3">
-    <p class="text-primary m-0 fw-bold">Informacion de Productos en Stock</p>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-md-6 text-nowrap">
-        <div
-          id="dataTable_length-1"
-          class="dataTables_length"
-          aria-controls="dataTable"
-        >
-          <label class="form-label"
-            >Mostrar<select class="d-inline-block form-select form-select-sm">
-              <option value="10" selected="">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="100">100</option></select
-            >&nbsp;</label
-          >
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="text-md-end dataTables_filter" id="dataTable_filter-1">
-          <label class="form-label"
-            ><input
-              type="search"
-              class="form-control form-control-sm"
-              aria-controls="dataTable"
-              placeholder="Buscar"
-          /></label>
-        </div>
-      </div>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- DataTables JavaScript -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <!-- DataTables Responsive CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
+
+  <!-- DataTables Responsive JavaScript -->
+  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+{% endblock %}
+
+{% block content %}
+  <h3 class="text-dark mb-4">Inventario de la Tienda</h3>
+  <div class="card shadow">
+    <div class="card-header py-3">
+      <p class="text-primary m-0 fw-bold">Informacion de Productos en Stock</p>
     </div>
-    <div
-      class="table-responsive table mt-2"
-      id="dataTable-1"
-      role="grid"
-      aria-describedby="dataTable_info"
-    >
-      <table class="table my-0" id="dataTable">
+    <div class="card-body">
+      <table id="myTable" class="display responsive">
         <thead>
           <tr>
-            <th>Nombre Producto</th>
-            <th>Detalles</th>
-            <th>Jugadores</th>
-            <th>Stock</th>
-            <th>Creador</th>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
             <th>Precio</th>
-            <th>Añadir/Quitar al Carrito</th>
+            <th>Detalles</th>
+            <th>Existencia</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/background-h-esport.jpg"
-              />Airi Satou
-            </td>
-            <td>Accountant</td>
-            <td>Tokyo</td>
-            <td>33</td>
-            <td>2008/11/28</td>
-            <td>$162,700</td>
-            <td>
-              <div
-                class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center"
-              >
-                <div
-                  class="col-lg-3 text-center d-lg-flex justify-content-lg-center align-items-lg-center"
-                >
-                  <button
-                    class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center"
-                    type="button"
-                    style="
-                      border-radius: 2000px;
-                      border-width: 50px;
-                      width: 30px;
-                      height: 30px;
-                    "
-                  >
-                    <i
-                      class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"
-                    ></i>
-                  </button>
-                </div>
-                <div
-                  class="col-2 col-sm-2 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"
-                >
-                  <strong>0</strong>
-                </div>
-                <div
-                  class="col-lg-4 d-lg-flex justify-content-lg-center align-items-lg-center"
-                >
-                  <button
-                    class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center"
-                    type="button"
-                    style="
-                      border-radius: 2000px;
-                      border-width: 50px;
-                      width: 30px;
-                      height: 30px;
-                    "
-                  >
-                    <i
-                      class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"
-                    ></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar2.jpeg"
-              />Angelica Ramos
-            </td>
-            <td>Chief Executive Officer(CEO)</td>
-            <td>London</td>
-            <td>47</td>
-            <td>2009/10/09<br /></td>
-            <td>$1,200,000</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar3.jpeg"
-              />Ashton Cox
-            </td>
-            <td>Junior Technical Author</td>
-            <td>San Francisco</td>
-            <td>66</td>
-            <td>2009/01/12<br /></td>
-            <td>$86,000</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar4.jpeg"
-              />Bradley Greer
-            </td>
-            <td>Software Engineer</td>
-            <td>London</td>
-            <td>41</td>
-            <td>2012/10/13<br /></td>
-            <td>$132,000</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar5.jpeg"
-              />Brenden Wagner
-            </td>
-            <td>Software Engineer</td>
-            <td>San Francisco</td>
-            <td>28</td>
-            <td>2011/06/07<br /></td>
-            <td>$206,850</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar1.jpeg"
-              />Brielle Williamson
-            </td>
-            <td>Integration Specialist</td>
-            <td>New York</td>
-            <td>61</td>
-            <td>2012/12/02<br /></td>
-            <td>$372,000</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar2.jpeg"
-              />Bruno Nash<br />
-            </td>
-            <td>Software Engineer</td>
-            <td>London</td>
-            <td>38</td>
-            <td>2011/05/03<br /></td>
-            <td>$163,500</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar3.jpeg"
-              />Caesar Vance
-            </td>
-            <td>Pre-Sales Support</td>
-            <td>New York</td>
-            <td>21</td>
-            <td>2011/12/12<br /></td>
-            <td>$106,450</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar4.jpeg"
-              />Cara Stevens
-            </td>
-            <td>Sales Assistant</td>
-            <td>New York</td>
-            <td>46</td>
-            <td>2011/12/06<br /></td>
-            <td>$145,600</td>
-            <td>Cell 7</td>
-          </tr>
-          <tr>
-            <td>
-              <img
-                class="rounded-circle me-2"
-                width="30"
-                height="30"
-                src="assets/img/avatars/avatar5.jpeg"
-              />Cedric Kelly
-            </td>
-            <td>Senior JavaScript Developer</td>
-            <td>Edinburgh</td>
-            <td>22</td>
-            <td>2012/03/29<br /></td>
-            <td>$433,060</td>
-            <td>Cell 7</td>
-          </tr>
+          {% for producto in productos %}
+            <tr>
+              <td>{{ producto.Codigo }}</td>
+              <td>{{ producto.Nombre }}</td>
+              <td>{{ producto.Tipo }}</td>
+              <td>{{ producto.Precio }} Bs</td>
+              <td>{{ producto.Detalles }}</td>
+              <td>{{ producto.Stock }} Producto(s)</td>
+            </tr>
+          {% endfor %}
         </tbody>
-        <tfoot>
-          <tr>
-            <td><strong>Nombre Producto</strong></td>
-            <td><strong>Detalles</strong></td>
-            <td><strong>Jugadores</strong></td>
-            <td><strong>Stock</strong></td>
-            <td><strong>Creador</strong></td>
-            <td><strong>Precio</strong></td>
-            <td>Summary 7</td>
-          </tr>
-        </tfoot>
       </table>
     </div>
-    <div class="row">
-      <div class="col-md-6 align-self-center">
-        <p
-          id="dataTable_info-1"
-          class="dataTables_info"
-          role="status"
-          aria-live="polite"
-        >
-          Mostrando 1 de 27
-        </p>
+  </div>
+
+  <div class="container">
+    <div class="row" style="padding-top: 32px;padding-bottom: 32px;">
+      <div class="col text-center">
+        <button class="btn btn-primary" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">Agregar Producto a Inventario</button>
       </div>
-      <div class="col-md-6">
-        <nav
-          class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers"
-        >
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" aria-label="Previous" href="#"
-                ><span aria-hidden="true">«</span></a
-              >
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" aria-label="Next" href="#"
-                ><span aria-hidden="true">»</span></a
-              >
-            </li>
-          </ul>
-        </nav>
+      <div class="col text-center" style="margin-top: 0px;">
+        <button class="btn" type="button" style="background: var(--bs-success-text-emphasis);color: var(--bs-body-bg);" data-bs-target="#modal-2" data-bs-toggle="modal">Registrar Venta de Producto</button>
       </div>
     </div>
   </div>
-</div>
-
-<div class="container">
-    <div class="row" style="padding-top: 32px;padding-bottom: 32px;">
-        <div class="col text-center"><button class="btn btn-primary" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">Agregar Producto a Inventario</button></div>
-        <div class="col text-center" style="margin-top: 0px;"><button class="btn" type="button" style="background: var(--bs-success-text-emphasis);color: var(--bs-body-bg);" data-bs-target="#modal-2" data-bs-toggle="modal">Registrar Venta de Producto</button></div>
-    </div>
-</div>
-<div class="container">
+  <div class="container">
     <div class="row d-lg-flex justify-content-lg-center align-items-lg-center">
-        <div class="col d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary" type="button" data-bs-target="#modal-3" data-bs-toggle="modal" style="background: rgb(156,144,35);border-width: 0px;">Editar Producto del Inventario</button></div>
+      <div class="col d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center">
+        <button class="btn btn-primary" type="button" data-bs-target="#modal-3" data-bs-toggle="modal" style="background: rgb(156,144,35);border-width: 0px;">Editar Producto del Inventario</button>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Agregar Inventario</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <form>
-                        <div class="row" style="padding-top: 0px;">
-                            <div class="col-6 col-lg-5 text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong class="text-center"><span style="color: rgb(0, 0, 0);">Imagen del Juego/Accesorio:</span></strong></div>
-                            <div class="col-6 col-sm-4 col-lg-7 text-center d-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center"><input class="form-control form-control-sm" type="file"></div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-right: 0px;">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Nombre Juego/Accesorio:</span></strong></div>
-                            </div>
-                            <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Nombre..."></div>
-                        </div>
-                        <div class="row" style="margin-top: 16px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Tipo:</span></strong></div>
-                            </div>
-                            <div class="col">
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Juego de Mesa</label></div>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2">Accesorio</label></div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio:</span></strong></div>
-                            </div>
-                            <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs"></div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Cantidad Jugadores:</span></strong></div>
-                            </div>
-                            <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="2-4, 2-8"></div>
-                        </div>
-                        <div class="row d-flex justify-content-center" style="margin-top: 15px;">
-                            <div class="col-6 col-sm-4 col-lg-4 text-center"><strong><span style="color: rgb(0, 0, 0);">Cantidad de Compra</span></strong>
-                                <div></div>
-                                <div>
-                                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
-                                        <div class="col-2 col-sm-3 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                                        <div class="col-2 col-sm-3 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"><strong><span style="color: rgb(0, 0, 0);">1</span></strong></div>
-                                        <div class="col-2 col-sm-3 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 15px;">
-                            <div class="col-12 col-lg-2 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Detalles del Juego/Accesorio:</span></strong></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><textarea class="form-control" style="height: 100px;color: rgb(0,0,0);"></textarea></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button><button class="btn btn-primary" type="button">Registrar Compra y Cerrar</button></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Inventario</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
         </div>
-    </div>
-</div>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"><span style="color: rgb(0, 0, 0);">Registrar Venta</span></h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <form>
-                        <div class="row">
-                            <div class="col"><strong><span style="color: rgb(0, 0, 0);">Carrito de Compra</span></strong></div>
-                            <div class="col text-end"><a href="#" style="border-color: rgb(215,20,20);color: #e02b1a;"><span style="color: rgb(207, 36, 36);">Remover todo</span></a></div>
-                        </div>
-                        <div class="row" style="padding-top: 20px;">
-                            <div class="col-lg-4 text-center"><img class="flex-fill" src="assets/img/dogs/image2.jpeg" width="120" height="120"></div>
-                            <div class="col-lg-4 text-center"><strong><span style="color: rgb(0, 0, 0);">Catan</span></strong>
-                                <div><small>2-4 Jugadores</small></div>
-                                <div>
-                                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
-                                        <div class="col-2 col-sm-2 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                                        <div class="col-2 col-sm-2 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"><strong><span style="color: rgb(0, 0, 0);">1</span></strong></div>
-                                        <div class="col-2 col-sm-2 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col text-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 24px;"><span style="color: rgb(0, 0, 0);">200 Bs</span></strong></div><a href="#" style="color: rgb(224,20,32);">Remover</a>
-                            </div>
-                        </div>
-                        <hr>
-                    </form>
-                    <div class="row">
-                        <div class="col-lg-11 text-end"><strong><span style="text-decoration: underline; color: rgb(0, 0, 0);">Total a Pagar:</span></strong></div>
+        <div class="modal-body">
+          <div class="container">
+            <form>
+              <div class="row" style="padding-top: 0px;">
+                <div class="col-6 col-lg-5 text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                  <strong class="text-center"><span style="color: rgb(0, 0, 0);">Imagen del Juego/Accesorio:</span></strong>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-7 text-center d-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <input class="form-control form-control-sm" type="file" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-right: 0px;">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Nombre Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Nombre..." />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 16px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Tipo:</span></strong>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="formCheck-1" /><label class="form-check-label" for="formCheck-1">Juego de Mesa</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="formCheck-2" /><label class="form-check-label" for="formCheck-2">Accesorio</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Cantidad Jugadores:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="2-4, 2-8" />
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center" style="margin-top: 15px;">
+                <div class="col-6 col-sm-4 col-lg-4 text-center">
+                  <strong><span style="color: rgb(0, 0, 0);">Cantidad de Compra</span></strong>
+                  <div></div>
+                  <div>
+                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <strong><span style="color: rgb(0, 0, 0);">1</span></strong>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-11 text-end"><strong><span style="color: rgb(0, 0, 0);">200 Bs</span></strong></div>
-                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="modal-footer"><button class="btn" type="button" data-bs-dismiss="modal" style="background: #b02323;color: var(--bs-light-bg-subtle);">Cancelar y Cerrar</button><button class="btn btn-primary" type="button">Confirmar Venta y Cerrar</button></div>
+              </div>
+              <hr />
+              <div class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 15px;">
+                <div class="col-12 col-lg-2 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Detalles del Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control" style="height: 100px;color: rgb(0,0,0);"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button><button class="btn btn-primary" type="button">Registrar Compra y Cerrar</button>
+        </div>
+      </div>
     </div>
-</div>
-<div class="modal fade" role="dialog" tabindex="-1" id="modal-3">
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Editar Producto</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <form>
-                        <div class="row" style="padding-top: 0px;">
-                            <div class="col-6 col-lg-5 text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong class="text-center"><span style="color: rgb(0, 0, 0);">Codigo del Juego/Accesorio:</span></strong></div>
-                            <div class="col-6 col-sm-4 col-lg-7 col-xl-6 text-center d-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Codigo..."></div>
-                            <div class="col-xl-1 d-xl-flex justify-content-xl-center align-items-xl-center"><button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-search d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-right: 0px;">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Nombre Juego/Accesorio:</span></strong></div>
-                            </div>
-                            <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Nombre..."></div>
-                        </div>
-                        <div class="row" style="margin-top: 16px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Descuento:</span></strong></div>
-                            </div>
-                            <div class="col-xl-3 d-xl-flex align-items-xl-center">
-                                <div class="d-grid">
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3">Si</label></div>
-                                </div>
-                                <div class="d-grid">
-                                    <div class="form-check" style="margin-left: 10px;"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4">No</label></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio con Descuento:</span></strong><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs"></div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio sin Descuento:</span></strong></div>
-                            </div>
-                            <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs"></div>
-                        </div>
-                        <div class="row" style="margin-top: 15px;">
-                            <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Cantidad Jugadores:</span></strong></div>
-                            </div>
-                            <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center"><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="2-4, 2-8"></div>
-                        </div>
-                        <div class="row d-flex justify-content-center" style="margin-top: 15px;">
-                            <div class="col-6 col-sm-4 col-lg-4 text-center"><strong><span style="color: rgb(0, 0, 0);">Cantidad en Stock</span></strong>
-                                <div></div>
-                                <div>
-                                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
-                                        <div class="col-2 col-sm-3 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                                        <div class="col-2 col-sm-3 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center"><strong><span style="color: rgb(0, 0, 0);">1</span></strong></div>
-                                        <div class="col-2 col-sm-3 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center"><button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 15px;">
-                            <div class="col-12 col-lg-2 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
-                                <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center"><strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Detalles del Juego/Accesorio:</span></strong></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col"><textarea class="form-control" style="height: 100px;color: rgb(0,0,0);"></textarea></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><span style="color: rgb(0, 0, 0);">Registrar Venta</span></h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
         </div>
+        <div class="modal-body">
+          <div class="container">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <strong><span style="color: rgb(0, 0, 0);">Carrito de Compra</span></strong>
+                </div>
+                <div class="col text-end">
+                  <a href="#" style="border-color: rgb(215,20,20);color: #e02b1a;"><span style="color: rgb(207, 36, 36);">Remover todo</span></a>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 20px;">
+                <div class="col-lg-4 text-center">
+                  <img class="flex-fill" src="assets/img/dogs/image2.jpeg" width="120" height="120" />
+                </div>
+                <div class="col-lg-4 text-center">
+                  <strong><span style="color: rgb(0, 0, 0);">Catan</span></strong>
+                  <div>
+                    <small>2-4 Jugadores</small>
+                  </div>
+                  <div>
+                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
+                      <div class="col-2 col-sm-2 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                      <div class="col-2 col-sm-2 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <strong><span style="color: rgb(0, 0, 0);">1</span></strong>
+                      </div>
+                      <div class="col-2 col-sm-2 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col text-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 24px;"><span style="color: rgb(0, 0, 0);">200 Bs</span></strong>
+                  </div><a href="#" style="color: rgb(224,20,32);">Remover</a>
+                </div>
+              </div>
+              <hr />
+            </form>
+            <div class="row">
+              <div class="col-lg-11 text-end">
+                <strong><span style="text-decoration: underline; color: rgb(0, 0, 0);">Total a Pagar:</span></strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-11 text-end">
+                <strong><span style="color: rgb(0, 0, 0);">200 Bs</span></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn" type="button" data-bs-dismiss="modal" style="background: #b02323;color: var(--bs-light-bg-subtle);">Cancelar y Cerrar</button><button class="btn btn-primary" type="button">Confirmar Venta y Cerrar</button>
+        </div>
+      </div>
     </div>
-</div>
-{%endblock%}
+  </div>
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-3">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Producto</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form>
+              <div class="row" style="padding-top: 0px;">
+                <div class="col-6 col-lg-5 text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                  <strong class="text-center"><span style="color: rgb(0, 0, 0);">Codigo del Juego/Accesorio:</span></strong>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-7 col-xl-6 text-center d-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Codigo..." />
+                </div>
+                <div class="col-xl-1 d-xl-flex justify-content-xl-center align-items-xl-center">
+                  <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-search d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-right: 0px;">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Nombre Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Nombre..." />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 16px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Descuento:</span></strong>
+                  </div>
+                </div>
+                <div class="col-xl-3 d-xl-flex align-items-xl-center">
+                  <div class="d-grid">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="formCheck-3" /><label class="form-check-label" for="formCheck-3">Si</label>
+                    </div>
+                  </div>
+                  <div class="d-grid">
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input" type="checkbox" id="formCheck-4" /><label class="form-check-label" for="formCheck-4">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio con Descuento:</span></strong><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio sin Descuento:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Cantidad Jugadores:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="2-4, 2-8" />
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center" style="margin-top: 15px;">
+                <div class="col-6 col-sm-4 col-lg-4 text-center">
+                  <strong><span style="color: rgb(0, 0, 0);">Cantidad en Stock</span></strong>
+                  <div></div>
+                  <div>
+                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <strong><span style="color: rgb(0, 0, 0);">1</span></strong>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 15px;">
+                <div class="col-12 col-lg-2 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Detalles del Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control" style="height: 100px;color: rgb(0,0,0);"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#myTable').DataTable({
+        responsive: true,
+        scrollY: '200px'
+      });
+    });
+  </script>
+{% endblock %}

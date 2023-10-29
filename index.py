@@ -32,9 +32,9 @@ def generate_username():
 
 @app.route('/')
 def home():
-    collection = db.get_collection('juegos-de-mesa')  # Replace with your collection name
-    items = list(collection.find().sort('_id', -1).limit(5))
-    return render_template('home.html', items=items)
+    #collection = db.get_collection('juegos-de-mesa')  # Replace with your collection name
+    #items = list(collection.find().sort('_id', -1).limit(5))
+    return render_template('home.html'''', items=items''')
 
 @app.route('/Torneos')
 def torneos():
@@ -50,7 +50,9 @@ def login():
 
 @app.route('/inventario')
 def inventario():
-    return render_template('inventario.html')
+    collection = db.get_collection('inventario')
+    productos = list(collection.find())
+    return render_template('inventario.html', productos=productos)
 
 @app.route('/panel')
 def panel():
@@ -101,7 +103,7 @@ def search_customer():
         })
     else:
         # Return an empty JSON object if not found
-        return jsonify({})
+        return jsonify({"message": "Cliente no encontrado"})
 
 @app.route('/update', methods=['PUT'])
 def update_customer():
@@ -134,12 +136,12 @@ def update_customer():
             if result.modified_count == 1:
                 return jsonify({"message": "Actualizado"})
             else:
-                return jsonify({})
+                return jsonify({"message": "No se pudo actualizar"})
         else:
-            return jsonify({})
+            return jsonify({"message": "Nombre no valido"})
         
     else:
-        return jsonify({})
+        return jsonify({"message":"Cliente no encontrado"})
 
         
 if __name__ == '__main__':
