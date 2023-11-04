@@ -1,6 +1,8 @@
 from flask import  Flask, render_template, jsonify, request
 from flask_paginate import Pagination,get_page_args
 from pymongo import MongoClient
+from werkzeug.utils import secure_filename
+import os
 import random, string
 
 app = Flask(__name__)
@@ -20,21 +22,41 @@ app.template_folder = "Templates"
 
 # Function to generate a unique username
 def generate_username():
-    while True:
-        collection = db.get_collection('clientes')
-        # Generate a random 5-digit number as a string
-        random_numbers = ''.join(random.choices(string.digits, k=5))
-        usercode = f'CLI{random_numbers}'
+    collection = db.get_collection('clientes')
+    # Retrieve the current count from the database
+    count = collection.find().count()
+    usercode = f'CLI{str(count).zfill(3)}'
+    
+    # Check if the generated username is unique
+    if not collection.find_one({'codigo-cliente': usercode}):
+        return usercode
+    else:
+        raise Exception("Failed to generate a unique username")
+
+def generate_inventory_code(gametype):
+    collection = db.get_collection('inventario')
+    # Retrieve the current count from the database
+    count = collection.find().count()
+    if gametype == "Juego de Mesa":
+        invcode = f'JDM{str(count).zfill(3)}'
+    else:
+        invcode = f'ACC{str(count).zfill(3)}'
+    
+    # Check if the generated inventory code is unique
+    if not collection.find_one({'Codigo': invcode}):
+        return invcode
+    else:
+        raise Exception("Failed to generate a unique inventory code")
         
-        # Check if the generated username is unique
-        if not collection.find_one({'codigo-cliente':usercode}):
-            return usercode
+def split_players(players):
+    x, y = players.split('-')
+    return int(x),int(y)
 
 @app.route('/')
 def home():
-    #collection = db.get_collection('juegos-de-mesa')  # Replace with your collection name
-    #items = list(collection.find().sort('_id', -1).limit(5))
-    return render_template('home.html'''', items=items''')
+    collection = db.get_collection('inventario')  # Replace with your collection name
+    items = list(collection.find().sort('_id', -1).limit(5))
+    return render_template('home.html', items=items)
 
 @app.route('/Torneos')
 def torneos():
@@ -53,6 +75,56 @@ def inventario():
     collection = db.get_collection('inventario')
     productos = list(collection.find())
     return render_template('inventario.html', productos=productos)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    collection = db.get_collection('inventario')
+    
+    name = request.form['name']
+    typegame = request.form['type']
+    price = request.form['price']
+    players = request.form['players']
+    quantity = request.form['quantity']
+    details = request.form['details']
+    image = request.files['image']
+    
+    #Split the values of players
+    min_players, max_players = split_players(players)
+    
+    #save the image in a directory
+    if not os.path.exists('gameimages'):
+        os.makedirs('gameimages')
+    filename = secure_filename(image.filename)
+
+    #Generate the inventory code
+    invcode = generate_inventory_code(typegame)
+    data = {
+        "Codigo": invcode,
+        "Imagen": filename,
+        "Nombre": name,
+        "Tipo": typegame,
+        "Detalles": details,
+        "Precio": float(price),
+        "Stock": int(quantity),
+        "Descuento": False,
+        "Precios-descuento": [
+            { "$numberLong": 0 }
+        ],
+        "jugadoresminimos": { "$numberInt": min_players },
+        "jugaodresmaximos": { "$numberInt": max_players },
+    }
+
+    productoagregado = collection.insert_one(data)
+
+    if productoagregado.modified_count == 1:
+        image.save(os.path.join('gameimages', filename))
+        return jsonify(
+            {
+                "message": "Producto agregado",
+                "code": invcode
+                })
+    else:
+        return jsonify({"message": "No se pudo agregar el producto"})
 
 @app.route('/panel')
 def panel():
