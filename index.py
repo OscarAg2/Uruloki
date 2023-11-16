@@ -1,4 +1,4 @@
-from flask import  Flask, render_template, jsonify, request
+from flask import  Flask, render_template, jsonify, request, session
 from flask_paginate import Pagination,get_page_args
 from pymongo import MongoClient
 from werkzeug.utils import secure_filename
@@ -11,6 +11,7 @@ app = Flask(__name__)
 uri = "mongodb+srv://xchar:minionswar2@cluster0.2loqznr.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the server
 client = MongoClient(uri)
+app.secret_key = 'kiwi'  # replace with your secret key
 db = client.get_database('tienda-uruloki')  # Replace with your database name
 
 
@@ -24,7 +25,7 @@ app.template_folder = "Templates"
 def generate_username():
     collection = db.get_collection('clientes')
     # Retrieve the current count from the database
-    count = collection.find().count()
+    count = collection.count_documents({})
     usercode = f'CLI{str(count).zfill(3)}'
     
     # Check if the generated username is unique
@@ -36,7 +37,7 @@ def generate_username():
 def generate_inventory_code(gametype):
     collection = db.get_collection('inventario')
     # Retrieve the current count from the database
-    count = collection.find().count()
+    count = collection.count_documents({})
     if gametype == "Juego de Mesa":
         invcode = f'JDM{str(count).zfill(3)}'
     else:
@@ -76,6 +77,31 @@ def inventario():
     productos = list(collection.find())
     return render_template('inventario.html', productos=productos)
 
+@app.route('/add_to_cart', methods=['POST'])
+def add_to_cart():
+    product_id = request.form.get('product_id')
+    product_name = request.form.get('product_name')
+    price_unitary = request.form.get('price_unitary')
+
+    if 'shopping_cart' not in session:
+        session['shopping_cart'] = {}
+
+    if product_id in session['shopping_cart']:
+        session['shopping_cart'][product_id]['quantity'] += 1
+    else:
+        session['shopping_cart'][product_id] = {
+            "product_name": product_name,
+            "quantity": 1,
+            "price_unitary": price_unitary
+        }
+
+    session.modified = True
+    return jsonify(success=True)
+
+@app.route('/get_cart', methods=['GET'])
+def get_cart():
+    return jsonify(session.get('shopping_cart', {}))
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     collection = db.get_collection('inventario')
@@ -108,15 +134,15 @@ def upload_file():
         "Stock": int(quantity),
         "Descuento": False,
         "Precios-descuento": [
-            { "$numberLong": 0 }
+            0
         ],
-        "jugadoresminimos": { "$numberInt": min_players },
-        "jugaodresmaximos": { "$numberInt": max_players },
+        "jugadoresminimos": int(min_players) ,
+        "jugaodresmaximos": int(max_players) ,
     }
 
     productoagregado = collection.insert_one(data)
 
-    if productoagregado.modified_count == 1:
+    if productoagregado.acknowledged == 1:
         image.save(os.path.join('gameimages', filename))
         return jsonify(
             {

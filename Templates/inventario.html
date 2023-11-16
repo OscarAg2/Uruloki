@@ -68,6 +68,7 @@
             <th>Precio</th>
             <th>Detalles</th>
             <th>Existencia</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>
@@ -79,6 +80,8 @@
               <td>{{ producto.Precio }} Bs</td>
               <td>{{ producto.Detalles }}</td>
               <td>{{ producto.Stock }} Producto(s)</td>
+              <td><button class="btn btn-primary add-to-cart" data-product-id="{{ producto.Codigo }}"               data-product-name="{{ producto.Nombre }}" 
+                data-product-price="{{ producto.Precio }}">Agregar Carrito</button></td>
             </tr>
           {% endfor %}
         </tbody>
@@ -232,7 +235,7 @@
                   <img class="flex-fill" src="assets/img/dogs/image2.jpeg" width="120" height="120" />
                 </div>
                 <div class="col-lg-4 text-center">
-                  <strong><span style="color: rgb(0, 0, 0);">Catan</span></strong>
+                  <strong><span style="color: rgb(0, 0, 0);" id="gamename">Catan</span></strong>
                   <div>
                     <small>2-4 Jugadores</small>
                   </div>
@@ -242,7 +245,7 @@
                         <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
                       </div>
                       <div class="col-2 col-sm-2 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
-                        <strong><span style="color: rgb(0, 0, 0);">1</span></strong>
+                        <strong><span style="color: rgb(0, 0, 0);" id="quantitybuy">1</span></strong>
                       </div>
                       <div class="col-2 col-sm-2 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
                         <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
@@ -271,7 +274,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn" type="button" data-bs-dismiss="modal" style="background: #b02323;color: var(--bs-light-bg-subtle);">Cancelar y Cerrar</button><button class="btn btn-primary" type="button">Confirmar Venta y Cerrar</button>
+          <button class="btn" type="button" data-bs-dismiss="modal" style="background: #b02323;color: var(--bs-light-bg-subtle);">Cancelar y Cerrar</button><button class="btn btn-primary" type="button" id="registrarventa">Confirmar Venta y Cerrar</button>
         </div>
       </div>
     </div>
@@ -407,6 +410,27 @@
         responsive: true,
         scrollY: '200px'
       });
+
+      $('.add-to-cart').on('click', function() {
+        var productId = $(this).data('product-id');
+        var productName = $(this).data('product-name');
+        var productPrice = $(this).data('product-price');
+        $.post('/add_to_cart', {
+          product_id: productId,
+          product_name: productName,
+          price_unitary: productPrice
+        }, function(data) {
+          if (!data.success) {
+            alert(data.message);
+          }
+        });
+      });
+    
+      $('#modal-2').on('show.bs.modal', function() {
+        $.get('/get_cart', function(data) {
+          document.getElementById('gamename').innerText = data.product_name;
+        });
+      });
     });
 
     function showAlert(title, subtitle, content) {
@@ -473,6 +497,12 @@
           // Display an error message in an alert
           alert(error.message);
         });
+    });
+
+    document.getElementById('registrarventa').addEventListener('click',function() {
+      var formData = new FormData();
+      formData.append('name', document.getElementById('gamename').innerText);
+      formData.append('quantity', document.getElementById('quantitybuy').innerText);
     });
   </script>
 {% endblock %}
