@@ -92,7 +92,7 @@ def add_to_cart():
         session['shopping_cart'][product_id] = {
             "product_name": product_name,
             "quantity": 1,
-            "price_unitary": price_unitary
+            "price_unitary": price_unitary,
         }
 
     session.modified = True
