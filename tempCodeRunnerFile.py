@@ -1,1 +1,1 @@
-render_template
+generate_username()

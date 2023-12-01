@@ -1,0 +1,247 @@
+{%extends "navbar_admin.html"%} {%block title%} Clientes {%endblock%} 
+{%block style%} <script src="{{url_for('static',filename='Scripts/search-clientes.css')}}"></script> {%endblock%} 
+{%block content%}
+<h3 class="text-dark mb-4">Clientes/Usuarios</h3>
+<div class="card shadow mb-3">
+  <div class="card-header py-3">
+    <p class="text-primary m-0 fw-bold">Agregar Nuevo Cliente</p>
+  </div>
+  <div class="card-body">
+    <form method="POST">
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="username"
+              ><strong>Codigo Usuario</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="username"
+              placeholder="CL234"
+              name="username"
+              value="{{username}}"
+              readonly
+              style="color: black"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="credit"
+              ><strong>Credito Inicial</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="credit"
+              placeholder="100 Bs"
+              name="credit"
+              style="color: black"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="first_name"
+              ><strong>Nombres</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="first_name"
+              placeholder="John"
+              name="first_name"
+              style="color: black"
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label" for="last_name"
+              ><strong>Apellidos</strong></label
+            >
+            <input
+              class="form-control"
+              type="text"
+              id="last_name"
+              placeholder="Doe"
+              name="last_name"
+              style="color: black"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary btn-sm" type="submit">
+          Agregar Cliente
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="card shadow">
+  <div class="card-header py-3">
+    <p class="text-primary m-0 fw-bold">Editar/Ver Cliente</p>
+  </div>
+  <div class="card-body">
+    <form id="search-form">
+      <div class="mb-3">
+        <label class="form-label" for="search-codigo"><strong>Codigo del Cliente</strong></label>
+        <input
+          class="form-control"
+          type="text"
+          id="search-codigo"
+          placeholder="CL234"
+          name="codigo"
+          style="color: black"
+        />
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary btn-sm" type="button" id="search-button">Buscar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Editar Cliente</h4>
+        <button
+          class="btn-close"
+          type="button"
+          aria-label="Close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="username-1"
+            style="margin-bottom: 0px; margin-right: 10px"
+          >
+            <strong>Nombre del Cliente:&nbsp;</strong>
+          </label>
+          <input
+            class="border rounded-pill"
+            type="text"
+            id="username-1"
+            placeholder="Nombre..."
+            name="username"
+          />
+        </div>
+        <div class="mb-3">
+          <label
+            class="form-label"
+            for="username-2"
+            style="margin-bottom: 0px; margin-right: 10px"
+          >
+            <strong>Creditos del Cliente:&nbsp;</strong>
+          </label>
+          <input
+            class="border rounded-pill"
+            type="text"
+            id="username-2"
+            placeholder="100 Bs"
+            name="username"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-primary" type="button" id="update-button">Guardar y Salir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error modal -->
+<div class="modal fade" role="dialog" tabindex="-1" id="error-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Error</h4>
+        <button
+          class="btn-close"
+          type="button"
+          aria-label="Close"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>Cliente no encontrado</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%} 
+{%block scripts%}
+<script>
+  // When the "Buscar" button is clicked
+  document.getElementById("search-button").addEventListener("click", function () {
+    // Get the customer code from the form
+    var codigo = document.getElementById("search-codigo").value;
+    
+    // Make a GET request to the search endpoint with the code parameter
+    fetch('/search?codigo=' + codigo)
+    .then(response => response.json())
+    .then(data => {
+      if (Object.keys(data).length === 0) {
+        // Show an error modal if the customer is not found
+        var errorModal = new bootstrap.Modal(document.getElementById("error-modal"));
+        errorModal.show();
+      } else {
+        // Fill out the modal with the customer data
+        document.getElementById("username-1").value = data.nombre;
+        document.getElementById("username-2").value = data.credito;
+        // Show the modal
+        var modal = new bootstrap.Modal(document.getElementById("modal-1"));
+        modal.show();
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Display an error message in an alert
+      alert(error);
+    });
+  });
+
+  document.getElementById("update-button").addEventListener("click", function () {
+    // Get the customer code, name, and credit from the form
+    var codigo = document.getElementById("search-codigo").value;
+    var nombre_completo = document.getElementById("username-1").value;
+    var credito = document.getElementById("username-2").value;
+  
+    // Make a PUT request to the update endpoint with the code parameter
+    fetch('/update?codigo=' + codigo, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: 'nombre_completo=' + encodeURIComponent(nombre_completo) + '&credito=' + encodeURIComponent(credito)
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Display a success or error message in an alert
+      alert(data.message);
+      // Hide the modal
+      var modal = new bootstrap.Modal(document.getElementById("modal-1"));
+      modal.hide();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Display an error message in an alert
+      alert('Un error ocurrio actualizando los datos del cliente');
+    });
+  });
+</script>
+{%endblock%}

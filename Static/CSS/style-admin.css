@@ -1,0 +1,12 @@
+#accordionSidebar {
+    transition: all 0.3s;
+}
+
+.navbar-toggler[aria-expanded="false"] + #navbarNav #accordionSidebar {
+    width: 0;
+    overflow: hidden;
+}
+
+.navbar-toggler[aria-expanded="true"] + #navbarNav #accordionSidebar {
+    width: auto;
+}

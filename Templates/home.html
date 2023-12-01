@@ -41,38 +41,16 @@
         </div>
         <div class="py-5 p-lg-5">
             <div class="row row-cols-1 row-cols-md-2 mx-auto" style="max-width: 900px;">
+                {% for item in items %}
                 <div class="col mb-5">
                     <div class="card shadow-sm">
                         <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid flex-shrink-1 flex-fill" width="320" height="200" style="width: 320px;height: 200px;" src="{{url_for('static',filename='assets/img/products/3.jpg')}}">
-                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
+                            <h5 class="fw-bold card-title">{{ item.Nombre }}</h5>
+                            <div class="card-text mb-4">{{ item.Detalles }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="col mb-5">
-                    <div class="card shadow-sm">
-                        <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="{{url_for('static',filename='assets/img/products/2.jpg')}}">
-                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" src="{{url_for('static',filename='assets/img/products/catan.jpg')}}" style="height: 200px;">
-                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body px-4 py-5 px-md-5">
-                            <h5 class="fw-bold card-title">Lorem ipsum dolor sit&nbsp;</h5><img class="rounded img-fluid" width="320" height="196" style="width: 320px;height: 200px;" src="{{url_for('static',filename='assets/img/products/1.jpg')}}">
-                            <p class="text-muted card-text mb-4">Erat netus est hendrerit, nullam et quis ad cras porttitor iaculis. Bibendum vulputate cras aenean.</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="row text-center">
                 <div class="col"><a href="{{url_for('tienda')}}"><button class="btn btn-primary shadow" type="button">Ir a la Tienda</button></a></div>

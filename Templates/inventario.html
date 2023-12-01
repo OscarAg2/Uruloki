@@ -1,166 +1,508 @@
-{% extends "navbar.html" %}
+{% extends 'navbar_admin.html' %}
 
-{%block title%} Inventario {%endblock%}
+{% block title %}
+  Inventario
+{% endblock %}
 
-{% block content%}
+{% block styles %}
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" />
 
-<section style="margin-bottom: 30px;">
-    <div class="container">
-        <div class="row" style="margin-top: 10px;">
-            <div class="col text-center"
-                style="margin-top: 10px;margin-bottom: 10px;">
-                <h1>Inventario</h1><small style="color: rgb(181,170,170);">Stock
-                    de la Tienda</small>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;"
-                                    rowspan="4">Codigo Item</th>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;">Nombre</th>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Stock</th>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Precio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">123493214</td>
-                                <td style="border-width: 1px;">Catan</td>
-                                <td style="border-right-width: 1px;">5</td>
-                                <td style="border-right-width: 1px;">100 Bs</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td
-                                    style="border-right-width: 1px;border-left-width: 1px;">342134312</td>
-                                <td style="border-right-width: 1px;">Monopoly</td>
-                                <td style="border-right-width: 1px;">6</td>
-                                <td style="border-right-width: 1px;">200 Bs</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><strong>USAR&nbsp;https://datatables.net/ PARA LA TABLA :D</strong>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col text-center" style="margin-top: 10px;"><a
-                    href="agregarinv.html" style="color: transparent;">Link<button
-                        class="btn btn-sm" type="button"
-                        style="background: #2d6369;">Agregar Item a Stock</button></a></div>
-        </div>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- DataTables JavaScript -->
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <!-- DataTables Responsive CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" />
+
+  <!-- DataTables Responsive JavaScript -->
+  <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+
+  <style>
+    /* Styling for the custom alert */
+    .custom-alert {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #f8d7da;
+      border: 1px solid #f5c6cb;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+    }
+    .custom-alert h2 {
+      margin-top: 0;
+      color: #721c24;
+    }
+    .custom-alert p {
+      color: #721c24;
+    }
+    .custom-alert button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <h3 class="text-dark mb-4">Inventario de la Tienda</h3>
+  <div class="card shadow">
+    <div class="card-header py-3">
+      <p class="text-primary m-0 fw-bold">Informacion de Productos en Stock</p>
     </div>
-</section>
-<section
-    style="background: url(Static/assets/img/dices6.png), rgb(58,55,84);">
-    <div class="container">
-        <div class="row" style="margin-top: 10px;">
-            <div class="col text-center">
-                <h1>Registrar Venta</h1><small style="color: rgb(181,170,170);">Registro
-                    de Venta</small>
-            </div>
+    <div class="card-body">
+      <table id="myTable" class="display responsive">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Detalles</th>
+            <th>Existencia</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for producto in productos %}
+            <tr>
+              <td>{{ producto.Codigo }}</td>
+              <td>{{ producto.Nombre }}</td>
+              <td>{{ producto.Tipo }}</td>
+              <td>{{ producto.Precio }} Bs</td>
+              <td>{{ producto.Detalles }}</td>
+              <td>{{ producto.Stock }} Producto(s)</td>
+              <td><button class="btn btn-primary add-to-cart" data-product-id="{{ producto.Codigo }}"               data-product-name="{{ producto.Nombre }}" 
+                data-product-price="{{ producto.Precio }}">Agregar Carrito</button></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row" style="padding-top: 32px;padding-bottom: 32px;">
+      <div class="col text-center">
+        <button class="btn btn-primary" type="button" data-bs-target="#modal-1" data-bs-toggle="modal">Agregar Producto a Inventario</button>
+      </div>
+      <div class="col text-center" style="margin-top: 0px;">
+        <button class="btn" type="button" style="background: var(--bs-success-text-emphasis);color: var(--bs-body-bg);" data-bs-target="#modal-2" data-bs-toggle="modal">Registrar Venta de Producto</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row d-lg-flex justify-content-lg-center align-items-lg-center">
+      <div class="col d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center">
+        <button class="btn btn-primary" type="button" data-bs-target="#modal-3" data-bs-toggle="modal" style="background: rgb(156,144,35);border-width: 0px;">Editar Producto del Inventario</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Agregar Inventario -->
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Inventario</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="row">
-            <div class="col">
-                <form>
-                    <div
-                        class="row text-center d-md-flex justify-content-md-center align-items-md-center"
-                        style="padding-bottom: 15px;">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="col-6 col-md-6"
-                                    style="padding-bottom: 5px;">
-                                    <div class="text-center"><strong>Codigo de
-                                            Item</strong></div>
-                                    <div
-                                        class="text-center d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center"><input
-                                            class="form-control" type="text"
-                                            style="width: 150px;height: 25px;"></div>
-                                </div>
-                                <div class="col-6 col-md-6"
-                                    style="padding-bottom: 5px;">
-                                    <div class="text-center"><strong>Cantidad de
-                                            Item</strong></div>
-                                    <div
-                                        class="text-center d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center"><input
-                                            class="form-control" type="text"
-                                            style="width: 150px;height: 25px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3" style="padding-bottom: 7px;">
-                            <div class="text-center"><strong>Codigo Cliente</strong></div>
-                            <div
-                                class="text-center d-flex d-md-flex justify-content-center align-items-center justify-content-md-center align-items-md-center"><input
-                                    class="form-control" type="text"
-                                    style="width: 150px;height: 25px;"></div>
-                        </div>
-                        <div class="col"><button class="btn" type="button"
-                                style="background: #2d6369;">Añadir al Pedido</button></div>
+        <div class="modal-body">
+          <div class="container">
+            <form>
+              <div class="row" style="padding-top: 0px;">
+                <div class="col-6 col-lg-5 text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                  <strong class="text-center"><span style="color: rgb(0, 0, 0);">Imagen del Juego/Accesorio:</span></strong>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-7 text-center d-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <input class="form-control form-control-sm" type="file" id="imageup"/>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-right: 0px;">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Nombre Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" id="nameup" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Nombre..." />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 16px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Tipo:</span></strong>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="formCheck-jm" /><label class="form-check-label" for="formCheck-1">Juego de Mesa</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="formCheck-acc" /><label class="form-check-label" for="formCheck-2">Accesorio</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" id="priceup" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Cantidad Jugadores:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" id="players" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="2-4, 2-8" />
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center" style="margin-top: 15px;">
+                <div class="col-6 col-sm-4 col-lg-4 text-center">
+                  <strong><span style="color: rgb(0, 0, 0);">Cantidad de Compra</span></strong>
+                  <div></div>
+                  <div>
+                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <strong id="quantityup"><span style="color: rgb(0, 0, 0);">1</span></strong>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
                     </div>
-                </form>
-            </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 15px;">
+                <div class="col-12 col-lg-2 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Detalles del Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control" style="height: 100px;color: rgb(0,0,0);" id="details"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">Cerrar</button>
+          <button class="btn btn-primary" type="button" data-bs-dismiss="modal" id="registroinv">Registrar Compra y Cerrar</button>
+        </div>
+      </div>
     </div>
-</section>
-<section
-    style="background: url(&quot;assets/img/dices6.png&quot;), rgb(58,55,84);padding-bottom: 15px;">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div
-                    class="table-responsive d-flex justify-content-center align-items-center">
-                    <table class="table table-hover table-dark">
-                        <thead style="width: 320px;">
-                            <tr>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;"
-                                    rowspan="4">Codigo Item</th>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;">Nombre</th>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Cantidad</th>
-                                <th class="text-center"
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">Total
-                                    a Pagar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center">
-                                <td
-                                    style="border-top-width: 1px;border-right-width: 1px;border-left-width: 1px;">123493214</td>
-                                <td style="border-width: 1px;">Catan</td>
-                                <td style="border-right-width: 1px;">5</td>
-                                <td style="border-right-width: 1px;">100 Bs</td>
-                            </tr>
-                            <tr class="text-center">
-                                <td
-                                    style="border-right-width: 1px;border-left-width: 1px;">342134312</td>
-                                <td style="border-right-width: 1px;">Monopoly</td>
-                                <td style="border-right-width: 1px;">6</td>
-                                <td style="border-right-width: 1px;">200 Bs</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><strong>USAR&nbsp;https://datatables.net/ PARA LA TABLA :D</strong>
+  </div>
+  <!-- Registrar Venta -->
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title"><span style="color: rgb(0, 0, 0);">Registrar Venta</span></h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form>
+              <div class="row">
+                <div class="col">
+                  <strong><span style="color: rgb(0, 0, 0);">Carrito de Compra</span></strong>
+                </div>
+                <div class="col text-end">
+                  <a href="#" style="border-color: rgb(215,20,20);color: #e02b1a;"><span style="color: rgb(207, 36, 36);">Remover todo</span></a>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 20px;">
+                <div class="col-lg-4 text-center">
+                  <img class="flex-fill" src="assets/img/dogs/image2.jpeg" width="120" height="120" />
+                </div>
+                <div class="col-lg-4 text-center">
+                  <strong><span style="color: rgb(0, 0, 0);" id="gamename">Catan</span></strong>
+                  <div>
+                    <small>2-4 Jugadores</small>
+                  </div>
+                  <div>
+                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
+                      <div class="col-2 col-sm-2 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                      <div class="col-2 col-sm-2 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <strong><span style="color: rgb(0, 0, 0);" id="quantitybuy">1</span></strong>
+                      </div>
+                      <div class="col-2 col-sm-2 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col text-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 24px;"><span style="color: rgb(0, 0, 0);">200 Bs</span></strong>
+                  </div><a href="#" style="color: rgb(224,20,32);">Remover</a>
+                </div>
+              </div>
+              <hr />
+            </form>
+            <div class="row">
+              <div class="col-lg-11 text-end">
+                <strong><span style="text-decoration: underline; color: rgb(0, 0, 0);">Total a Pagar:</span></strong>
+              </div>
             </div>
+            <div class="row">
+              <div class="col-lg-11 text-end">
+                <strong><span style="color: rgb(0, 0, 0);">200 Bs</span></strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col d-flex justify-content-center align-items-center"><button
-                    class="btn btn-primary" type="button">Realizar Venta</button></div>
-            <div
-                class="col text-center d-flex justify-content-center align-items-center"><button
-                    class="btn btn-danger" type="button">Eliminar Venta</button></div>
+        <div class="modal-footer">
+          <button class="btn" type="button" data-bs-dismiss="modal" style="background: #b02323;color: var(--bs-light-bg-subtle);">Cancelar y Cerrar</button><button class="btn btn-primary" type="button" id="registrarventa">Confirmar Venta y Cerrar</button>
         </div>
+      </div>
     </div>
-</section>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/bold-and-dark.js"></script>
-{%endblock%}
+  </div>
+  <!-- Editar Producto -->
+  <div class="modal fade" role="dialog" tabindex="-1" id="modal-3">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Editar Producto</h4><button class="btn-close" type="button" aria-label="Close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form>
+              <div class="row" style="padding-top: 0px;">
+                <div class="col-6 col-lg-5 text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                  <strong class="text-center"><span style="color: rgb(0, 0, 0);">Codigo del Juego/Accesorio:</span></strong>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-7 col-xl-6 text-center d-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Codigo..." />
+                </div>
+                <div class="col-xl-1 d-xl-flex justify-content-xl-center align-items-xl-center">
+                  <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-search d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center" style="padding-right: 0px;">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Nombre Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="Nombre..." />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 16px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Descuento:</span></strong>
+                  </div>
+                </div>
+                <div class="col-xl-3 d-xl-flex align-items-xl-center">
+                  <div class="d-grid">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="formCheck-3" /><label class="form-check-label" for="formCheck-3">Si</label>
+                    </div>
+                  </div>
+                  <div class="d-grid">
+                    <div class="form-check" style="margin-left: 10px;">
+                      <input class="form-check-input" type="checkbox" id="formCheck-4" /><label class="form-check-label" for="formCheck-4">No</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio con Descuento:</span></strong><input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Precio sin Descuento:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="200Bs" />
+                </div>
+              </div>
+              <div class="row" style="margin-top: 15px;">
+                <div class="col-6 col-lg-5 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Cantidad Jugadores:</span></strong>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-7 d-flex justify-content-center align-items-center">
+                  <input class="border rounded-pill form-control" type="text" style="background: rgb(184,165,238);color: rgb(0,0,0);" placeholder="2-4, 2-8" />
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center" style="margin-top: 15px;">
+                <div class="col-6 col-sm-4 col-lg-4 text-center">
+                  <strong><span style="color: rgb(0, 0, 0);">Cantidad en Stock</span></strong>
+                  <div></div>
+                  <div>
+                    <div class="row d-flex d-lg-flex justify-content-center justify-content-lg-center align-items-lg-center" style="margin-top: 10px;">
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary text-center border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-plus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-1 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-lg-center align-items-lg-center">
+                        <strong><span style="color: rgb(0, 0, 0);">1</span></strong>
+                      </div>
+                      <div class="col-2 col-sm-3 col-md-2 col-lg-3 text-end d-flex d-sm-flex d-lg-flex justify-content-center justify-content-sm-center align-items-sm-center justify-content-lg-center align-items-lg-center">
+                        <button class="btn btn-primary border rounded-pill d-flex justify-content-center align-items-center" type="button" style="border-radius: 2000px;border-width: 50px;width: 30px;height: 30px;"><i class="fas fa-minus d-lg-flex justify-content-lg-center align-items-lg-center"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr />
+              <div class="row text-center d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 15px;">
+                <div class="col-12 col-lg-2 text-center d-flex d-lg-flex justify-content-center align-items-center justify-content-lg-center align-items-lg-center">
+                  <div class="text-center d-lg-flex justify-content-lg-center align-items-lg-center">
+                    <strong style="font-size: 16px;"><span style="color: rgb(0, 0, 0);">Detalles del Juego/Accesorio:</span></strong>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <textarea class="form-control" style="height: 100px;color: rgb(0,0,0);"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Alert -->
+  <div class="custom-alert" id="customAlert">
+    <h2 id="alertTitle"></h2>
+    <p id="alertSubtitle"></p>
+    <p id="alertContent"></p>
+    <button id="acceptButton">Aceptar</button>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#myTable').DataTable({
+        responsive: true,
+        scrollY: '200px'
+      });
+
+      $('.add-to-cart').on('click', function() {
+        var productId = $(this).data('product-id');
+        var productName = $(this).data('product-name');
+        var productPrice = $(this).data('product-price');
+        $.post('/add_to_cart', {
+          product_id: productId,
+          product_name: productName,
+          price_unitary: productPrice
+        }, function(data) {
+          if (!data.success) {
+            alert(data.message);
+          }
+        });
+      });
+    
+      $('#modal-2').on('show.bs.modal', function() {
+        $.get('/get_cart', function(data) {
+          document.getElementById('gamename').innerText = data.product_name;
+        });
+      });
+    });
+
+    function showAlert(title, subtitle, content) {
+      document.getElementById("alertTitle").innerText = title;
+      document.getElementById("alertSubtitle").innerText = subtitle;
+      document.getElementById("alertContent").innerText = content;
+
+      document.getElementById("customAlert").style.display = "block";
+    };
+
+    function hideAlert() {
+      document.getElementById("customAlert").style.display = "none";
+    }
+    
+    window.onload = function() {
+      var quantity = document.getElementById('quantityup');
+      var plusButton = document.getElementsByClassName('fa-plus')[0].parentNode;
+      var minusButton = document.getElementsByClassName('fa-minus')[0].parentNode;
+    
+      plusButton.addEventListener('click', function() {
+        quantity.innerText = parseInt(quantity.innerText) + 1;
+      });
+    
+      minusButton.addEventListener('click', function() {
+        if (parseInt(quantity.innerText) > 1) {
+          quantity.innerText = parseInt(quantity.innerText) - 1;
+        }
+      });
+    };
+
+    document.getElementById("acceptButton").addEventListener("click", hideAlert);
+
+    document.getElementById('registroinv').addEventListener('click', function() {
+      var formData = new FormData();
+      formData.append('image', document.getElementById('imageup').files[0]);
+      formData.append('name', document.getElementById('nameup').value);
+      formData.append('type', document.getElementById('formCheck-jm').checked ? 'Juego de Mesa' : 'Accesorio');
+      formData.append('price', document.getElementById('priceup').value);
+      formData.append('players', document.getElementById('players').value);
+      formData.append('quantity', document.getElementById('quantityup').innerText);
+      formData.append('details', document.getElementById('details').value);
+    
+      fetch('/upload', {
+        method: 'POST',
+        body: formData
+      }).then(response => response.json())
+        .then(data => {
+          if (Object.keys(data).length === 0) {
+            // Show an error alert if the customer is not found
+            const title = "Error";
+            const subtitle = "No se pudo registrar el producto";
+            const content = "Por favor, intente de nuevo";
+            showAlert(title, subtitle, content);
+          } else {
+            // Show a success alert
+            const title = "Producto Registrado";
+            const subtitle = "El producto se ha registrado exitosamente";
+            const content = "El codigo del producto es: " + data.code + "";
+            showAlert(title, subtitle, content);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          // Display an error message in an alert
+          alert(error.message);
+        });
+    });
+
+    document.getElementById('registrarventa').addEventListener('click',function() {
+      var formData = new FormData();
+      formData.append('name', document.getElementById('gamename').innerText);
+      formData.append('quantity', document.getElementById('quantitybuy').innerText);
+    });
+  </script>
+{% endblock %}

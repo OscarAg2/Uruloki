@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Web Page</title>
+
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css"
+            href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+        <!-- jQuery -->
+        <script type="text/javascript"
+            src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- DataTables JavaScript -->
+        <script type="text/javascript"
+            src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+    </head>
+    <body>
+        <table id="myTable" class="display">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Detalles</th>
+                <th>Existencia</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for producto in productos %}
+                <tr>
+                  <td>{{ producto.Codigo }}</td>
+                  <td>{{ producto.Nombre }}</td>
+                  <td>{{ producto.Tipo }}</td>
+                  <td>{{ producto.Precio }}</td>
+                  <td>{{ producto.Detalles }}</td>
+                  <td>{{ producto.Stock }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <script>
+            $(document).ready(function () {
+              $('#myTable').DataTable()
+            })
+          </script>
+    </body>
+</html>
