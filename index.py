@@ -1,29 +1,33 @@
 from flask import  Flask, render_template, jsonify, request, session
 from flask_paginate import Pagination,get_page_args
 from pymongo import MongoClient
+from dotenv import load_dotenv
 from werkzeug.utils import secure_filename
 import os
-import random, string
 
 app = Flask(__name__)
 
-# MongoDB connection
-uri = "mongodb+srv://xchar:minionswar2@cluster0.2loqznr.mongodb.net/?retryWrites=true&w=majority"
+#Extracting Info from the .env file
+load_dotenv()
+app.secret_key = os.getenv('SECRET_KEY') #Secret Key for the session
+uri = os.getenv('MONGO_URI') #Uri for the mongo DB
+
 # Create a new client and connect to the server
 client = MongoClient(uri)
-app.secret_key = 'kiwi'  # replace with your secret key
 db = client.get_database('tienda-uruloki')  # Replace with your database name
 
+#Google API Key for the maps
+GOOGLE_API_KEY = os.getenv('GAPIKEY')
 
-RESULTS_PER_PAGE = 12 # Number of results per page
+# Number of results per page
+RESULTS_PER_PAGE = 12
 
-GOOGLE_API_KEY = 'AIzaSyBpYcf0TjJrOI2Aw3UJ5_KLDJQewicguEw'
-
+# Set the default folder of templates
 app.template_folder = "Templates"
 
 # Function to generate a unique username
 def generate_username():
-    collection = db.get_collection('clientes')
+    collection = db.get_collection('Cliente')
     # Retrieve the current count from the database
     count = collection.count_documents({})
     usercode = f'CLI{str(count).zfill(3)}'
@@ -34,8 +38,9 @@ def generate_username():
     else:
         raise Exception("Failed to generate a unique username")
 
+# Function to generate a unique inventory code
 def generate_inventory_code(gametype):
-    collection = db.get_collection('inventario')
+    collection = db.get_collection('Inventario')
     # Retrieve the current count from the database
     count = collection.count_documents({})
     if gametype == "Juego de Mesa":
@@ -55,7 +60,7 @@ def split_players(players):
 
 @app.route('/')
 def home():
-    collection = db.get_collection('inventario')  # Replace with your collection name
+    collection = db.get_collection('Inventario')  # Replace with your collection name
     items = list(collection.find().sort('_id', -1).limit(5))
     return render_template('home.html', items=items)
 
@@ -71,9 +76,10 @@ def tienda():
 def login():
     return render_template('login.html')
 
+#ENDPOINT OF INVENTARIO
 @app.route('/inventario')
 def inventario():
-    collection = db.get_collection('inventario')
+    collection = db.get_collection('Inventario')
     productos = list(collection.find())
     return render_template('inventario.html', productos=productos)
 
@@ -92,19 +98,19 @@ def add_to_cart():
         session['shopping_cart'][product_id] = {
             "product_name": product_name,
             "quantity": 1,
-            "price_unitary": price_unitary,
+            "price_unitary": price_unitary
         }
 
     session.modified = True
     return jsonify(success=True)
 
-@app.route('/get_cart', methods=['GET'])
-def get_cart():
+@app.route('/get_cart_items', methods=['GET'])
+def get_cart_items():
     return jsonify(session.get('shopping_cart', {}))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    collection = db.get_collection('inventario')
+    collection = db.get_collection('Inventario')
     
     name = request.form['name']
     typegame = request.form['type']
@@ -117,7 +123,7 @@ def upload_file():
     #Split the values of players
     min_players, max_players = split_players(players)
     
-    #save the image in a directory
+    #Save the image in a directory
     if not os.path.exists('gameimages'):
         os.makedirs('gameimages')
     filename = secure_filename(image.filename)
@@ -160,9 +166,10 @@ def panel():
 def eventos():
     return render_template("eventos.html")
 
+#ENDPOINT DE CLIENTES
 @app.route('/clientes', methods=['GET', 'POST'])
 def clientes():
-    collection = db.get_collection('clientes')
+    collection = db.get_collection('Cliente')
     if request.method == 'POST':
         # Get data from the form
         codigocliente = request.form['username']
@@ -186,7 +193,7 @@ def clientes():
 
 @app.route('/search', methods=['GET'])
 def search_customer():
-    collection = db.get_collection('clientes')
+    collection = db.get_collection('Cliente')
     codigo = request.args.get('codigo')
 
     # Use your MongoDB collection to search for the customer data
@@ -205,7 +212,7 @@ def search_customer():
 
 @app.route('/update', methods=['PUT'])
 def update_customer():
-    collection = db.get_collection('clientes')
+    collection = db.get_collection('Cliente')
     credito = request.form.get('credito')
     nombre_completo = request.form.get('nombre_completo')
     if nombre_completo:
